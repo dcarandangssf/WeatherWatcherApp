@@ -8,19 +8,19 @@
     <ion-content>
         <ion-list>
             <ion-list-header>
-                General
+                <h2><strong>General</strong></h2>
             </ion-list-header>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                {{p.title}}
+                <p text-center>{{p.title}}</p>
             </button>
             <button menuClose ion-item (click)="logout()">
-                Logout
+                <p text-center>Logout</p>
             </button>
             <ion-list-header>
-                Saved Cities
+                <h2><strong>Saved Cities</strong></h2>
             </ion-list-header>
             <button menuClose ion-item *ngFor="let c of cities" (click)="goToCity(c)">
-                {{c.name}}
+                <p text-center>{{c.name}}</p>
             </button>
         </ion-list>
     </ion-content>
