@@ -25,7 +25,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: LobbyPage },
+      { title: 'Lobby', component: LobbyPage },
       { title: 'Account Settings', component: AccountSettingsPage }
     ];
     
@@ -50,5 +50,9 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  
+  logout() {
+    this.nav.setRoot(LoginPage);
   }
 }
