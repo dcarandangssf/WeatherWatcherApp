@@ -19,4 +19,12 @@ export class AccountSettingsPage {
     console.log('Hello AccountSettingsPage Page');
   }
 
+  user = {};
+  
+  signupForm(form) {
+    console.log(this.user);
+    if (form.invalid) {
+      return alert("Please fill in all of the required fields.");
+    }
+  }
 }

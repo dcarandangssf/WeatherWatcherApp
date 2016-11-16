@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>AccountSettings</ion-title>
   </ion-navbar>
 
@@ -14,5 +17,44 @@
 
 
 <ion-content padding>
-
+    <form #settingsForm="ngForm" (ngSubmit)="signupForm(settingsForm)">
+      
+        <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="user.email" name="email" required></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>First Name</ion-label>
+            <ion-input type="text" [(ngModel)]="user.firstName" name="firstName" required></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input type="text" [(ngModel)]="user.lastName" name="lastName" required></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Organization</ion-label>
+            <ion-input type="text" [(ngModel)]="user.organization" name="organization"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Old Password</ion-label>
+            <ion-textarea [(ngModel)]="user.password" name="password" required></ion-textarea>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>New Password</ion-label>
+            <ion-textarea [(ngModel)]="user.newPassword" name="password" required></ion-textarea>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Repeat New Password</ion-label>
+            <ion-textarea [(ngModel)]="user.repeatNewPassword" name="password" required></ion-textarea>
+        </ion-item>
+        
+        <button ion-button type="submit" block="true">Edit</button>
+        
+    </form>
 </ion-content>

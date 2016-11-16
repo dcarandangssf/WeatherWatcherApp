@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Nav } from 'ionic-angular';
 
 /*
   Generated class for the Lobby page.

@@ -1,22 +1,54 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
+import { LobbyPage } from '../pages/lobby/lobby';
+import { AccountSettingsPage } from '../pages/account-settings/account-settings';
 
 
 @Component({
-  template: `<ion-nav [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.html'
+  // `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = LoginPage;
+  @ViewChild(Nav) nav: Nav;
+  
+  rootPage: any = LoginPage;
 
-  constructor(platform: Platform) {
-    platform.ready().then(() => {
+  pages: Array<{title: string, component: any}>;
+
+  cities: Array<{name: string}>;
+
+  constructor(public platform: Platform) {
+    this.initializeApp();
+
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: 'Home', component: LobbyPage },
+      { title: 'Account Settings', component: AccountSettingsPage }
+    ];
+    
+    this.cities = [
+      { name: 'San Diego, CA' },
+      { name: 'Los Angeles, CA' },
+      { name: 'San Francisco, CA' }
+    ];
+
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
+  }
+
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(page.component);
   }
 }

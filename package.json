@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "build": "ionic-app-scripts build",
-"watch": "ionic-app-scripts watch",
-"serve:before": "watch",
-"emulate:before": "watch",
-"deploy:before": "build",
-"build:before": "build",
-"run:before": "watch"
+    "watch": "ionic-app-scripts watch",
+    "serve:before": "watch",
+    "emulate:before": "watch",
+    "deploy:before": "build",
+    "build:before": "build",
+    "run:before": "watch"
   },
   "dependencies": {
     "@angular/common": "2.1.1",

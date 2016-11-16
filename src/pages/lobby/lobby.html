@@ -7,16 +7,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-icon name="menu" left></ion-icon>
-    <ion-title center>Lobby</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lobby</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-icon name="search"></ion-icon>
-    <ion-input placeholder="<Location/City Name>"></ion-input>
-  </ion-item>
+
+  <ion-searchbar
+    [(ngModel)]="myInput"
+    (ionInput)="onInput($event)"
+    placeholder="location/city name">
+  </ion-searchbar>
+  
+  <ion-card>
+    
+    <ion-card-header>
+      <ion-item text-center>
+        <h3>San Diego, CA</h3>
+      </ion-item>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-item center text-center>
+        <p>Temperature: 73°F</p>
+        <p>Forecast: Clear skys</p>
+      </ion-item>
+    </ion-card-content>
+    
+  </ion-card>
 </ion-content>
