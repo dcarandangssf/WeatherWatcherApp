@@ -17,7 +17,10 @@
 
 <ion-content padding>
 
-  <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)" placeholder="location/city name" autocomplete="on"></ion-searchbar>
+  <ion-searchbar #search
+                 (change)="onInput($event)" 
+                 placeholder="location/city name" 
+                 autocomplete="on"></ion-searchbar>
   
   <ion-card>
     

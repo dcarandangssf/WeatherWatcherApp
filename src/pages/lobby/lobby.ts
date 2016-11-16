@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Nav } from 'ionic-angular';
+import { NavController, Nav, MenuController } from 'ionic-angular';
 
 /*
   Generated class for the Lobby page.
@@ -13,10 +13,16 @@ import { NavController, Nav } from 'ionic-angular';
 })
 export class LobbyPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,
+  private menu: MenuController) {}
 
   ionViewDidLoad() {
     console.log('Hello LobbyPage Page');
+    this.menu.swipeEnable(true, 'menu1');
+  }
+
+  onInput($event) {
+    console.log($event);
   }
 
 }

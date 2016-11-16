@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { LobbyPage } from '../lobby/lobby';
 
 /*
@@ -14,11 +14,14 @@ import { LobbyPage } from '../lobby/lobby';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private menu: MenuController) {
+                this.menu.swipeEnable(false, 'menu1');
   }
 
   ionViewDidLoad() {
     console.log('Hello RegisterPage Page');
+    this.menu.swipeEnable(false, 'menu1');
   }
   
   user = {};
