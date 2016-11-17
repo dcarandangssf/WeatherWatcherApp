@@ -26,7 +26,7 @@
     
     <ion-card-header>
       <ion-item text-center>
-        <h3>San Diego, CA</h3>
+        <h3>{{this.city}}, {{this.state}}</h3>
       </ion-item>
     </ion-card-header>
     
@@ -34,6 +34,7 @@
       <ion-item center text-center>
         <p>Temperature: 73°F</p>
         <p>Forecast: Clear skys</p>
+        <p>{{this.localForecast}}</p>
       </ion-item>
     </ion-card-content>
     

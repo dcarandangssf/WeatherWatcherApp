@@ -13,7 +13,10 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class WeatherService {
   private appId = 'c56568eedbc03ac8';
-  private baseUrl = 'https://api.wunderground.com/api/'
+  private baseUrl = 'https://api.wunderground.com/api/';
+
+  city: any;
+  state: any;
 
   constructor(public http: Http) {
     console.log('Hello WeatherService Provider');
@@ -43,4 +46,27 @@ export class WeatherService {
     })
     return Obs
   }
+  
+  getForecast(city, state) {
+    
+    let Obs = Observable.create(observer => {
+
+      let url = this.baseUrl + this.appId;
+      url += '/forecast/q/';
+      url += `${state}/${city}.json`;
+      
+      this.http.get(url)
+        .subscribe(
+          data => {
+            observer.next(data.json());
+          },
+          err => observer.error(err),
+          () => observer.complete()
+        )
+    })
+    return Obs
+  }
+  
+  
+  // http://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/CA/San_Francisco.json
 }

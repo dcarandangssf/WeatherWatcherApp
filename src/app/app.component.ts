@@ -6,6 +6,7 @@ import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
 
+import { RestWWUser } from '../providers/rest-ww-user';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +21,8 @@ export class MyApp {
 
   cities: Array<{name: string}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform,
+              public restWWUser: RestWWUser) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -52,7 +54,20 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   
-  logout() {
-    this.nav.setRoot(LoginPage);
+  logout(token) {
+    this.restWWUser.logout(window.localStorage.getItem('token'))
+    .map(res => res.json())
+    .subscribe(res => {
+      window.localStorage.clear();
+      this.nav.setRoot(LoginPage);
+    }, err => {
+      //because this is logging the user out, we don't need to worry about this here.
+      // alert("Something went really wrong.");
+      window.localStorage.clear();
+      this.nav.setRoot(LoginPage);
+    });
+    // this.restWWUser.logout
+    // this.nav.setRoot(LoginPage);
   }
+  
 }

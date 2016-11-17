@@ -18,9 +18,7 @@ export class RegisterPage {
   constructor(
     public navCtrl: NavController,
     private menu: MenuController,
-    public restWWUser: RestWWUser) {
-      this.menu.swipeEnable(false, 'menu1');
-    }
+    public restWWUser: RestWWUser) {}
 
   ionViewDidLoad() {
     console.log('Hello RegisterPage Page');
@@ -47,7 +45,7 @@ export class RegisterPage {
     .subscribe(res => {
       window.localStorage.setItem('token', res.token);
       window.localStorage.setItem('userId', res.id);
-      this.navCtrl.push(LobbyPage);
+      this.navCtrl.setRoot(LobbyPage);
     }, err => {
       alert("Uh ohes!");
     });

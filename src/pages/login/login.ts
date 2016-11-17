@@ -12,7 +12,7 @@ import { RestWWUser } from '../../providers/rest-ww-user';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-login',
+  selector: 'page-login', 
   templateUrl: 'login.html'
 })
 export class LoginPage {
