@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class WeatherService {
   private appId = 'c56568eedbc03ac8';
-  private baseUrl = 'http://api.wunderground.com/api/c56568eedbc03ac8/geolookup/q/37.776289,-122.395234.json'
+  private baseUrl = 'https://api.wunderground.com/api/'
 
   constructor(public http: Http) {
     console.log('Hello WeatherService Provider');
@@ -28,7 +28,7 @@ export class WeatherService {
           
           let url = this.baseUrl + this.appId;
           url += '/geolookup/q/';
-          url += `${lat},${lng}`;
+          url += `${lat},${lng}.json`;
           
           this.http.get(url)
             .subscribe(
@@ -41,5 +41,6 @@ export class WeatherService {
             
         })
     })
+    return Obs
   }
 }

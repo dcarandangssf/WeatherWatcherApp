@@ -13,10 +13,14 @@ import { WeatherService } from '../../providers/weather-service';
   templateUrl: 'lobby.html'
 })
 export class LobbyPage {
+  public localWeather: Object;
 
-
-  constructor(public navCtrl: NavController,
-              private menu: MenuController) {}
+  constructor(
+    public navCtrl: NavController,
+    private menu: MenuController,
+    public weather: WeatherService) {
+      this.getLocalWeather();
+    }
 
   ionViewDidLoad() {
     console.log('Hello LobbyPage Page');
@@ -27,4 +31,11 @@ export class LobbyPage {
     console.log($event);
   }
 
+  getLocalWeather() {
+    this.weather.local().subscribe(
+      data => {
+        this.localWeather = data;
+        console.log(this.localWeather);
+      })
+  }
 }
