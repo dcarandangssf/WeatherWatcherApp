@@ -3,6 +3,7 @@ import { NavController, MenuController } from 'ionic-angular';
 import { LobbyPage } from '../lobby/lobby';
 import { RegisterPage } from '../register/register';
 
+import { RestWWUser } from '../../providers/rest-ww-user';
 
 /*
   Generated class for the Login page.
@@ -18,7 +19,8 @@ export class LoginPage {
   
   constructor(
     public navCtrl: NavController,
-    private menu: MenuController) {}  
+    private menu: MenuController,
+    public restWWUser: RestWWUser) {}  
 
   ionViewDidLoad() {
     console.log('Hello Landing Page');
@@ -27,12 +29,29 @@ export class LoginPage {
 
   user = {};
   
+  // signinForm(form) {
+  //   console.log(this.user);
+  //   if (form.invalid) {
+  //     return alert("Please fill in all of the required fields.");
+  //   }
+  //   this.navCtrl.setRoot(LobbyPage);
+  // }
+
   signinForm(form) {
     console.log(this.user);
     if (form.invalid) {
       return alert("Please fill in all of the required fields.");
     }
-    this.navCtrl.setRoot(LobbyPage);
+    this.restWWUser.login(this.user)
+    .map(res => res.json())
+    .subscribe(res => {
+      console.log(res);
+      window.localStorage.setItem('token', res.id);
+      window.localStorage.setItem('userId', res.userId);
+      this.navCtrl.setRoot(LobbyPage);
+    }, err => {
+      console.log(err);
+    });
   }
 
   register() {

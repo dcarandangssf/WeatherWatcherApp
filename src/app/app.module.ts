@@ -7,7 +7,9 @@ import { LobbyPage } from '../pages/lobby/lobby';
 import { SearchResultsPage } from '../pages/search-results/search-results';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
 import { SavedCitiesPage } from '../pages/saved-cities/saved-cities';
+
 import { WeatherService } from '../providers/weather-service';
+import { RestWWUser } from '../providers/rest-ww-user';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { WeatherService } from '../providers/weather-service';
     AccountSettingsPage,
     SavedCitiesPage
   ],
-  providers: [WeatherService]
+  providers: [
+    WeatherService,
+    RestWWUser]
 })
 export class AppModule {}
