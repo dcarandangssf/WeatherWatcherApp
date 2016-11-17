@@ -7,6 +7,7 @@ import { LobbyPage } from '../pages/lobby/lobby';
 import { SearchResultsPage } from '../pages/search-results/search-results';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
 import { SavedCitiesPage } from '../pages/saved-cities/saved-cities';
+import { WeatherService } from '../providers/weather-service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,6 @@ import { SavedCitiesPage } from '../pages/saved-cities/saved-cities';
     AccountSettingsPage,
     SavedCitiesPage
   ],
-  providers: []
+  providers: [WeatherService]
 })
 export class AppModule {}
