@@ -7,6 +7,7 @@ export class RestWWUser {
 
   private baseUrl = "https://weather-watcher-backend-dcarandangssf.c9users.io:8080/api/"
   private path = "WWUsers/"
+  
   constructor(public http: Http) {
     console.log('Hello RestWWUser Provider');
   }
@@ -27,10 +28,16 @@ export class RestWWUser {
 
   logout(token) {
     return this.http.post(
-      this.baseUrl + this.path + 'logout' +
-        '?access_token=' + token,
+      this.baseUrl + this.path + 'logout' + '?access_token=' + token,
       {} //you have to pass an empty object because this is using the post
         //method and it is expecting two parameters of this function call
     );
   } 
+  
+  edit(editedUserData, userId, token) {
+    return this.http.patch(
+      this.baseUrl + this.path + userId + '?access_token=' + token,
+      editedUserData
+    );
+  }  
 }

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Nav, MenuController } from 'ionic-angular';
 import { WeatherService } from '../../providers/weather-service';
+import { SavedCitiesService } from '../../providers/saved-cities-service';
 
 /*
   Generated class for the Lobby page.
@@ -23,19 +24,24 @@ export class LobbyPage {
   public low: any;
   public high: any;
   public forecast: any;
+  public card: any;
   
 
   constructor(
     public navCtrl: NavController,
     private menu: MenuController,
-    public weather: WeatherService) {
+    public weather: WeatherService,
+    public citiesService: SavedCitiesService) {
       this.getLocation();
+      
+      this.card = {};
     }
 
   ionViewDidLoad() {
     console.log('Hello LobbyPage Page');
     this.menu.swipeEnable(true, 'menu1');
   }
+
 
   onInput(value) {
     console.log(value);
@@ -72,7 +78,19 @@ export class LobbyPage {
   }
 
   saveFavorite() {
-    console.log("saved to favorites!");
+    this.card.userId = window.localStorage.getItem('userId');
+    this.card.cityName = this.city;
+    this.card.cityAPIUrl = this.requestUrl;
+    this.card.id = window.localStorage.getItem('token')
+      this.citiesService.save(this.card, this.card.id)
+        .subscribe(res => {
+          console.log(res);
+          if (res.status === 200) {
+            console.log(this.card.cityName + " saved to favorites!");
+          }
+        }, err => {
+          console.log(err);
+        })
   }
 
 }

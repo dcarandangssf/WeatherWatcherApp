@@ -20,7 +20,9 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     private menu: MenuController,
-    public restWWUser: RestWWUser) {}  
+    public restWWUser: RestWWUser) {
+      window.localStorage.clear();
+    }  
 
   ionViewDidLoad() {
     console.log('Hello Landing Page');

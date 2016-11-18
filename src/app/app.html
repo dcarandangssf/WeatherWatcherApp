@@ -22,6 +22,10 @@
             <button menuClose ion-item *ngFor="let c of cities" (click)="goToCity(c)">
                 <p text-center>{{c.name}}</p>
             </button>
+            
+            <ion-item>
+                {{this.saved}}
+            </ion-item>
         </ion-list>
     </ion-content>
 

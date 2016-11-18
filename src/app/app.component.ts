@@ -7,6 +7,7 @@ import { LobbyPage } from '../pages/lobby/lobby';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
 
 import { RestWWUser } from '../providers/rest-ww-user';
+import { SavedCitiesService } from '../providers/saved-cities-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,23 +22,35 @@ export class MyApp {
 
   cities: Array<{name: string}>;
 
-  constructor(public platform: Platform,
-              public restWWUser: RestWWUser) {
-    this.initializeApp();
+  saved: any;
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Lobby', component: LobbyPage },
-      { title: 'Account Settings', component: AccountSettingsPage }
-    ];
-    
-    this.cities = [
-      { name: 'San Diego, CA' },
-      { name: 'Los Angeles, CA' },
-      { name: 'San Francisco, CA' }
-    ];
+  constructor(
+    public platform: Platform,
+    public restWWUser: RestWWUser,
+    public citiesService: SavedCitiesService) {
+      this.initializeApp();
 
-  }
+      // used for an example of ngFor and navigation
+      this.pages = [
+        { title: 'Lobby', component: LobbyPage },
+        { title: 'Account Settings', component: AccountSettingsPage }
+      ];
+      
+      this.cities = [
+        { name: 'San Diego, CA' },
+        { name: 'Los Angeles, CA' },
+        { name: 'San Francisco, CA' }
+      ];
+  
+      this.citiesService.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+       .map(res => res.json())
+        .subscribe(res => {
+          this.saved = res;
+          console.log(this.saved);
+        }, err => {
+          console.log("Warning Will Robinson! \n" + err);
+        });
+      }
 
   initializeApp() {
     this.platform.ready().then(() => {

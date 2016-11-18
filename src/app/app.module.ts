@@ -10,6 +10,7 @@ import { SavedCitiesPage } from '../pages/saved-cities/saved-cities';
 
 import { WeatherService } from '../providers/weather-service';
 import { RestWWUser } from '../providers/rest-ww-user';
+import { SavedCitiesService } from '../providers/saved-cities-service';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RestWWUser } from '../providers/rest-ww-user';
   ],
   providers: [
     WeatherService,
-    RestWWUser]
+    RestWWUser,
+    SavedCitiesService]
 })
 export class AppModule {}
