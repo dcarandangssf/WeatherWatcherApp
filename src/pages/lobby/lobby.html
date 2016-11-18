@@ -18,7 +18,7 @@
 <ion-content padding>
 
   <ion-searchbar #search
-                 (change)="onInput($event)" 
+                 (input)="onInput(value)" 
                  placeholder="location/city name" 
                  autocomplete="on"></ion-searchbar>
   
@@ -34,13 +34,16 @@
       <ion-item center text-center>
         <p>Temperature: 73°F</p>
         <p>Forecast: Clear skys</p>
-        <p>{{this.localForecast}}</p>
+        <p>{{this.day}}</p>
+        <p>Forecast: {{this.forecast}}</p>
+        <p>Low: {{this.low}}°</p>
+        <p>High: {{this.high}}°</p>
       </ion-item>
     </ion-card-content>
     
       <ion-row>
         <ion-col>  
-          <button ion-button primary clear item-left>
+          <button ion-button primary clear item-left (click)="saveFavorite()">
             <ion-icon name="star"></ion-icon>
             Save
           </button>
@@ -49,7 +52,7 @@
         <ion-col>
           <ion-item>
             <ion-label text-right>°F/°C</ion-label>
-            <ion-toggle checked="true" item-right></ion-toggle>
+            <ion-toggle checked="true" item-right (click)="degrees()"></ion-toggle>
           </ion-item>
         </ion-col>
       </ion-row>

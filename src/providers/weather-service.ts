@@ -50,11 +50,11 @@ export class WeatherService {
   getForecast(city, state) {
     
     let Obs = Observable.create(observer => {
-
+      
       let url = this.baseUrl + this.appId;
       url += '/forecast/q/';
       url += `${state}/${city}.json`;
-      
+      console.log(url);
       this.http.get(url)
         .subscribe(
           data => {
@@ -66,7 +66,6 @@ export class WeatherService {
     })
     return Obs
   }
-  
-  
+
   // http://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/CA/San_Francisco.json
 }
