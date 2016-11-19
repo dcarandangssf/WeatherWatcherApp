@@ -5,7 +5,7 @@ import { CitiesRest } from '../../providers/cities-rest';
 import { LocationService } from '../../providers/location-service'
 import { CardService } from '../../providers/card-service'
 import { WeatherCardPage } from '../weather-card/weather-card'
-
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Lobby page.
@@ -30,6 +30,7 @@ export class LobbyPage {
   public high: any;
   public forecast: any;
   public card: any;
+  // public cardList: any;
   
 
   constructor(
@@ -112,4 +113,15 @@ export class LobbyPage {
   //       })
   // }
 
+  getCardList(e) {
+    console.log(e)
+    this.citiesRest.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+     .map(res => res.json())
+      .subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.log("warning!");
+      });
+  }
+  
 }

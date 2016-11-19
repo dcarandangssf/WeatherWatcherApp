@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather'
+import { CardService } from '../../providers/card-service'
+import { Card } from '../../models/weather-card-model'
 
 /*
   Generated class for the WeatherCard page.
@@ -13,7 +15,7 @@ import { RestWeather } from '../../providers/rest-weather'
   templateUrl: 'weather-card.html'
 })
 export class WeatherCardPage {
-  // public card: any;
+  public card: any;
   public city: any;
   public cityParse: any;
   public state: any;
@@ -34,7 +36,8 @@ export class WeatherCardPage {
   
   constructor(
     public navCtrl: NavController,
-    public weather: RestWeather) {
+    public weather: RestWeather,
+    public cardService: CardService) {
       this.getLocation();
       
       // console.log("weatherCard: " + this.weatherCard)
@@ -48,11 +51,13 @@ export class WeatherCardPage {
     console.log('Hello WeatherCardPage Page');
   }
 
-  card = {
-    "userId": "",
-    "cityName": "",
-    "cityAPIUrl": ""
-  }
+  // card = {
+  //   "userId": "",
+  //   "cityName": "",
+  //   "cityAPIUrl": ""
+  // }
+
+  
 
   getLocation() {
     this.weather.local()
@@ -63,6 +68,9 @@ export class WeatherCardPage {
           this.cityParse = data.location.city.split(' ').join('_');
           this.state = data.location.state;
           this.requestUrl = data.location.requesturl;
+          
+          this.card = new Card("" , this.city + ", " + this.state, this.requestUrl)
+          console.log(this.card)
           
           // this.card.userId = window.localStorage.getItem("userId");
           // this.card.cityName = this.city + ", " + this.state;
@@ -111,19 +119,23 @@ export class WeatherCardPage {
       )
   }
   
-  saveFavorite() {
+  saveFavorite(card) {
     console.log("favorite saved")
+    card.userId = window.localStorage.getItem("userId")
+    card.cityAPIUrl = this.requestUrl
+    this.cardService.saveCard(card)
+    console.log(card)
   }
   
   degrees(deg) {
     console.log("degrees changed")
     console.log(deg)
     
-    if (deg.activated === true) {
+    if (deg.checked === true) {
       this.low = this.lowF;
       this.high = this.highF;
     }
-    else if (deg.activated === false) {
+    else if (deg.checked === false) {
       this.low = this.lowC;
       this.high = this.highC;
     }

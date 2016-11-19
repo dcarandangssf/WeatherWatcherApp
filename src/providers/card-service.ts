@@ -42,15 +42,17 @@ export class CardService {
   }
 
   getCard() {
-    return this.card;
+    return this.citiesRest.getList(window.localStorage.getItem("userId"), window.localStorage.getItem("token"));
   }
   
-  saveCard() {
-    this.card.userId = window.localStorage.getItem('userId');
-    this.card.cityName = this.city;
-    this.card.cityAPIUrl = this.requestUrl;
-    this.card.id = window.localStorage.getItem('token')
-      this.citiesRest.save(this.card, this.card.id)
+  saveCard(card) {
+    // this.card.userId = window.localStorage.getItem('userId');
+    // this.card.cityName = this.city;
+    // this.card.cityAPIUrl = this.requestUrl;
+    // this.card.id = window.localStorage.getItem('token')
+    // card.userId = window.localStorage.getItem("userId")
+    console.log(card)
+      this.citiesRest.save(card, window.localStorage.getItem("token"))
         .subscribe(res => {
           console.log(res);
           if (res.status === 200) {
