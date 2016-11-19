@@ -1,0 +1,49 @@
+  <ion-card>
+    
+    <ion-card-header>
+      <ion-item text-center>
+        <h1>{{this.city}}, {{this.state}}</h1>
+      </ion-item>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-item center text-center>
+        <!--<p>Temperature: 73°F</p>-->
+        <!--<p>Forecast: Clear skys</p>-->
+        <h2>{{this.day}}</h2>
+        
+        <ion-item text-center>
+          <p><strong>Forecast:</strong> {{this.forecast}}</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-row center>
+            <ion-col offset-25>
+              <p>Low: {{this.low}}°</p>
+            </ion-col>
+            <ion-col width-25>
+              <p>High: {{this.high}}°</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        
+      </ion-item>
+    </ion-card-content>
+    
+      <ion-row baseline>
+        <ion-col>  
+          <button ion-button primary clear item-left (click)="saveFavorite()">
+            <ion-icon name="star"></ion-icon>
+            Save
+          </button>
+        </ion-col>
+      
+        <ion-col>
+          <ion-item>
+            <ion-label text-right>°F/°C</ion-label>
+            <ion-toggle #deg checked="true" item-right (ionChange)="degrees(deg)"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    
+  </ion-card>

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class WeatherService {
+export class RestWeather {
   private appId = 'c56568eedbc03ac8';
   private baseUrl = 'https://api.wunderground.com/api/';
 

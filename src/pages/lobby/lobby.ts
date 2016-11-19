@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Nav, MenuController } from 'ionic-angular';
-import { WeatherService } from '../../providers/weather-service';
-import { SavedCitiesService } from '../../providers/saved-cities-service';
+import { RestWeather } from '../../providers/rest-weather';
+import { CitiesRest } from '../../providers/cities-rest';
+import { LocationService } from '../../providers/location-service'
+import { CardService } from '../../providers/card-service'
+import { WeatherCardPage } from '../weather-card/weather-card'
+
 
 /*
   Generated class for the Lobby page.
@@ -11,11 +15,12 @@ import { SavedCitiesService } from '../../providers/saved-cities-service';
 */  
 @Component({
   selector: 'page-lobby',
-  templateUrl: 'lobby.html'
+  templateUrl: 'lobby.html',
+  providers: [WeatherCardPage]
 })
 export class LobbyPage {
-  public location: Object;
-  public localForecast: Object;
+  public locationData: any;
+  public localForecast: any;
   public city: any;
   public cityParse: any;
   public state: any;
@@ -30,12 +35,40 @@ export class LobbyPage {
   constructor(
     public navCtrl: NavController,
     private menu: MenuController,
-    public weather: WeatherService,
-    public citiesService: SavedCitiesService) {
-      this.getLocation();
+    public weather: RestWeather,
+    public citiesRest: CitiesRest,
+    public locationServ: LocationService,
+    public cardService: CardService,
+    public weatherCardPage: WeatherCardPage) {
+      // this.locationData = this.locationServ.getLocation();
+      // console.log(this.locationData);
       
-      this.card = {};
+      // this.city = this.locationData.location.city;
+      // this.cityParse = this.locationData.location.city.split(' ').join('_');
+      // this.state = this.locationData.location.state;
+      // this.requestUrl = this.locationData.location.requesturl;
+      
+      // this.localForecast = data;
+      // this.low = this.locationData.forecast.simpleforecast.forecastday["0"].low.fahrenheit;
+      // this.high = this.locationData.forecast.simpleforecast.forecastday["0"].high.fahrenheit;
+      // this.day = this.locationData.forecast.txt_forecast.forecastday["0"].title;
+      // this.forecast = this.locationData.forecast.txt_forecast.forecastday["0"].fcttext;
+      
+      this.isSaved = false;
+      // this.card = this.weatherCardPage.getLocation();
+      console.log(this.card)
     }
+
+          // this.city = data.location.city;
+          // this.cityParse = data.location.city.split(' ').join('_');
+          // this.state = data.location.state;
+          // this.requestUrl = data.location.requesturl;
+          
+        // this.localForecast = data;
+        // this.low = data.forecast.simpleforecast.forecastday["0"].low.fahrenheit;
+        // this.high = data.forecast.simpleforecast.forecastday["0"].high.fahrenheit;
+        // this.day = data.forecast.txt_forecast.forecastday["0"].title;
+        // this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
 
   ionViewDidLoad() {
     console.log('Hello LobbyPage Page');
@@ -46,51 +79,37 @@ export class LobbyPage {
   onInput(value) {
     console.log(value);
   }
-  
-  getLocation() {
-    this.weather.local()
-      .subscribe(
-        data => {
-          this.location = data.location;
-          this.city = data.location.city;
-          this.cityParse = data.location.city.split(' ').join('_');
-          this.state = data.location.state;
-          this.requestUrl = data.location.requesturl;
-          console.log(data.location)
-          console.log(this.requestUrl)
-          this.getLocalForecast(this.cityParse, this.state)
-        })
-    return this.location
 
-  }
+  // degrees() {
+  //   console.log("changes °F/C")
+  // }
   
-  getLocalForecast(city, state) {
-    this.weather.getForecast(city, state).subscribe(
-      data => {
-        this.localForecast = data;
-        this.low = data.forecast.simpleforecast.forecastday["0"].low.fahrenheit;
-        this.high = data.forecast.simpleforecast.forecastday["0"].high.fahrenheit;
-        this.day = data.forecast.txt_forecast.forecastday["0"].title;
-        this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
-        console.log(this.localForecast);
-      })
-    return this.localForecast
-  }
-
-  saveFavorite() {
-    this.card.userId = window.localStorage.getItem('userId');
-    this.card.cityName = this.city;
-    this.card.cityAPIUrl = this.requestUrl;
-    this.card.id = window.localStorage.getItem('token')
-      this.citiesService.save(this.card, this.card.id)
-        .subscribe(res => {
-          console.log(res);
-          if (res.status === 200) {
-            console.log(this.card.cityName + " saved to favorites!");
-          }
-        }, err => {
-          console.log(err);
-        })
-  }
+  isSaved = false;
+  
+  // starClicked(card) {
+    
+  // }
+  
+  // saveFavorite() {
+  //   this.cardService.saveCard();
+  //   console.log("Saved to favorites")
+    
+  // }
+  
+  // saveFavorite() {
+  //   this.card.userId = window.localStorage.getItem('userId');
+  //   this.card.cityName = this.city;
+  //   this.card.cityAPIUrl = this.requestUrl;
+  //   this.card.id = window.localStorage.getItem('token')
+  //     this.citiesService.save(this.card, this.card.id)
+  //       .subscribe(res => {
+  //         console.log(res);
+  //         if (res.status === 200) {
+  //           console.log(this.card.cityName + " saved to favorites!");
+  //         }
+  //       }, err => {
+  //         console.log(err);
+  //       })
+  // }
 
 }

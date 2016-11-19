@@ -1,9 +1,3 @@
-<!--
-  Generated template for the Lobby page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -16,47 +10,15 @@
 </ion-header>
 
 <ion-content padding>
+  
+    <ion-searchbar #search
+                   (change)="onInput(search.value)" 
+                   placeholder="location/city name" 
+                   autocomplete="on">
+    </ion-searchbar>
 
-  <ion-searchbar #search
-                 (input)="onInput(value)" 
-                 placeholder="location/city name" 
-                 autocomplete="on"></ion-searchbar>
   
-  <ion-card>
-    
-    <ion-card-header>
-      <ion-item text-center>
-        <h3>{{this.city}}, {{this.state}}</h3>
-      </ion-item>
-    </ion-card-header>
-    
-    <ion-card-content>
-      <ion-item center text-center>
-        <p>Temperature: 73°F</p>
-        <p>Forecast: Clear skys</p>
-        <p>{{this.day}}</p>
-        <p>Forecast: {{this.forecast}}</p>
-        <p>Low: {{this.low}}°</p>
-        <p>High: {{this.high}}°</p>
-      </ion-item>
-    </ion-card-content>
-    
-      <ion-row>
-        <ion-col>  
-          <button ion-button primary clear item-left (click)="saveFavorite()">
-            <ion-icon name="star"></ion-icon>
-            Save
-          </button>
-        </ion-col>
-      
-        <ion-col>
-          <ion-item>
-            <ion-label text-right>°F/°C</ion-label>
-            <ion-toggle checked="true" item-right (click)="degrees()"></ion-toggle>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    
-  </ion-card>
-  
+    <page-weather-card>
+    </page-weather-card>
+
 </ion-content>
