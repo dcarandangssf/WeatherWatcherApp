@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Nav, MenuController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather';
 import { CitiesRest } from '../../providers/cities-rest';
-import { LocationService } from '../../providers/location-service'
+// import { LocationService } from '../../providers/location-service'
 import { CardService } from '../../providers/card-service'
 import { WeatherCardPage } from '../weather-card/weather-card'
 import 'rxjs/add/operator/map';
@@ -30,7 +30,7 @@ export class LobbyPage {
   public high: any;
   public forecast: any;
   public card: any;
-  // public cardList: any;
+  public cardList: any;
   
 
   constructor(
@@ -38,7 +38,7 @@ export class LobbyPage {
     private menu: MenuController,
     public weather: RestWeather,
     public citiesRest: CitiesRest,
-    public locationServ: LocationService,
+    // public locationServ: LocationService,
     public cardService: CardService,
     public weatherCardPage: WeatherCardPage) {
       // this.locationData = this.locationServ.getLocation();
@@ -55,9 +55,10 @@ export class LobbyPage {
       // this.day = this.locationData.forecast.txt_forecast.forecastday["0"].title;
       // this.forecast = this.locationData.forecast.txt_forecast.forecastday["0"].fcttext;
       
-      this.isSaved = false;
+      // this.isSaved = false;
+      console.log(this.cardList)
       // this.card = this.weatherCardPage.getLocation();
-      console.log(this.card)
+      // console.log(this.card)
     }
 
           // this.city = data.location.city;
@@ -74,6 +75,19 @@ export class LobbyPage {
   ionViewDidLoad() {
     console.log('Hello LobbyPage Page');
     this.menu.swipeEnable(true, 'menu1');
+    
+    this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+      .map(res => res.json())
+        .subscribe(res => {
+          // this.cardList = res;
+          this.cardList = res || [];
+          console.log("cardList")
+          console.log(this.cardList)
+          return this.cardList
+        }, err => {
+          alert("Warning Will Robinson!");
+          this.cardList = [];
+        });
   }
 
 
@@ -115,13 +129,24 @@ export class LobbyPage {
 
   getCardList(e) {
     console.log(e)
-    this.citiesRest.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
-     .map(res => res.json())
-      .subscribe(res => {
-        console.log(res);
-      }, err => {
-        console.log("warning!");
-      });
+    // console.log(this.cardList)
+    
+    // this.cardList = this.cardService.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+    // this.cardList = this.citiesRest.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+    // .map(res => res.json())
+    //   .subscribe(data => {
+    //     console.log(data);
+    //   }, err => {
+    //     console.log("warning!");
+    //   });
+    // console.log(this.cardList)
   }
+
+  deleteCity(cardId, index) {
+    console.log("city deleted")
+    console.log(cardId)
+    this.cardService.deleteCard(cardId)
+    this.cardList.splice(index, 1)
+  }  
   
 }

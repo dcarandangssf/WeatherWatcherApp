@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 
 import { CitiesRest } from './cities-rest';
 import { LocationService } from './location-service';
+import { Card } from '../models/weather-card-model'
 
 /*
   Generated class for the CardService provider.
@@ -17,33 +18,33 @@ export class CardService {
   public cardInfo: any;
   public city: any;
   public requestUrl: any;
-  public cardlist: any;
+  // public cardList: any;
+  public card: any;
 
-  card = {
-    "userId": "",
-    "cityName": "",
-    "cityAPIUrl": "",
-    "id": ""
-  }
+  // card = {
+  //   "userId": "",
+  //   "cityName": "",
+  //   "cityAPIUrl": "",
+  //   "id": ""
+  // }
 
-  // cardlist = [];
+  cardList = [];
   
   constructor(public http: Http,
               public citiesRest: CitiesRest,
               public locationService: LocationService) {
     console.log('Hello CardService Provider');
-    this.isFavorited = false;
-    let card = this;
-    
-    
-    this.cardInfo = this.locationService.getLocation();
+    // let card = this;
+    this.card = new Card("" , "", "", false)
+    // this.card.isFavorited = false;
+    // this.cardInfo = this.locationService.getLocation();
     // this.cardinfo.forEach(funciton())
     
   }
 
-  getCard() {
-    return this.citiesRest.getList(window.localStorage.getItem("userId"), window.localStorage.getItem("token"));
-  }
+  // getCard() {
+  //   return this.citiesRest.getList(window.localStorage.getItem("userId"), window.localStorage.getItem("token"));
+  // }
   
   saveCard(card) {
     // this.card.userId = window.localStorage.getItem('userId');
@@ -51,6 +52,7 @@ export class CardService {
     // this.card.cityAPIUrl = this.requestUrl;
     // this.card.id = window.localStorage.getItem('token')
     // card.userId = window.localStorage.getItem("userId")
+    card.isFavorited = true;
     console.log(card)
       this.citiesRest.save(card, window.localStorage.getItem("token"))
         .subscribe(res => {
@@ -63,9 +65,18 @@ export class CardService {
         })
   }
   
-  deleteCard() {
+  deleteCard(cardId) {
     console.log("removed favorite")
-    // this.cards
+    // card.isFavorited = false;
+      this.citiesRest.removeCard(cardId, window.localStorage.getItem("token"))
+        .subscribe(res => {
+          console.log(res);
+          if (res.status === 200) {
+            console.log(this.card.cityName + " deleted from favorites!");
+          }
+        }, err => {
+          console.log(err);
+        })
   }
   
   saveCardList = function(card, token) {
@@ -80,12 +91,25 @@ export class CardService {
   
   getCardList(userId, token) {
     console.log("getting card list")
-    return this.citiesRest.getList(userId, token);
+    // this.citiesRest.getList(userId, token);
+    // this.citiesRest.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+    //   .map(res => res.json())
+    //     .subscribe(res => {
+    //       this.cardList = res;
+    //       // this.cardList = res || [];
+    //       console.log("cardList")
+    //       console.log(this.cardList)
+    //       return this.cardList
+    //     }, err => {
+    //       alert("Warning Will Robinson!");
+    //       // this.cardList = [];
+    //     });
+    return this.citiesRest.getList(userId, token)
   }
-  
-  setCards(cards) {
-    console.log("setting cards")
-    this.cardlist = cards;
-  }
+
+  // setCards(cards) {
+  //   console.log("setting cards")
+  //   this.cardList = cards;
+  // }
   
 }

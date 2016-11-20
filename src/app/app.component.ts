@@ -8,6 +8,7 @@ import { AccountSettingsPage } from '../pages/account-settings/account-settings'
 
 import { RestWWUser } from '../providers/rest-ww-user';
 import { CitiesRest } from '../providers/cities-rest';
+import { CardService } from '../providers/card-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,13 +21,14 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  cities: Array<{name: string}>;
+  cities: Array<{}>;
 
   saved: any;
 
   constructor(
     public platform: Platform,
     public restWWUser: RestWWUser,
+    public cardService: CardService,
     public citiesService: CitiesRest) {
       this.initializeApp();
 
@@ -36,20 +38,25 @@ export class MyApp {
         { title: 'Account Settings', component: AccountSettingsPage }
       ];
       
+      
       this.cities = [
         { name: 'San Diego, CA' },
         { name: 'Los Angeles, CA' },
         { name: 'San Francisco, CA' }
       ];
   
-      this.citiesService.getList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
-       .map(res => res.json())
-        .subscribe(res => {
-          this.saved = res;
-          console.log(this.saved);
-        }, err => {
-          console.log("Warning Will Robinson! \n" + err);
-        });
+    // this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+    //   .map(res => res.json())
+    //     .subscribe(res => {
+    //       this.cardList = res;
+    //       // this.cardList = res || [];
+    //       console.log("cardList")
+    //       console.log(this.cardList)
+    //       return this.cardList
+    //     }, err => {
+    //       alert("Warning Will Robinson!");
+    //       // this.cardList = [];
+    //     });
       }
 
   initializeApp() {
@@ -66,7 +73,21 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  goToCity(cardList) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    // this.nav.setRoot(cardList.component);
+    console.log(cardList)
+    console.log("sidemenu cardlist")
+  }
   
+  deleteCity(card) {
+    console.log("city deleted")
+    console.log(card)
+    this.cardService.deleteCard(card)
+  }
+
   logout(token) {
     this.restWWUser.logout(window.localStorage.getItem('token'))
     .map(res => res.json())
@@ -83,4 +104,9 @@ export class MyApp {
     // this.nav.setRoot(LoginPage);
   }
   
+  // ionViewDidLeave() {
+  //   this.cities = this.cardService.getCardList()
+  //   console.log(this.cities)
+  // }
+      
 }

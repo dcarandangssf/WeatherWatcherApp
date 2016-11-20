@@ -69,13 +69,15 @@ export class WeatherCardPage {
           this.state = data.location.state;
           this.requestUrl = data.location.requesturl;
           
-          this.card = new Card("" , this.city + ", " + this.state, this.requestUrl)
+          this.card = new Card("" , this.city + ", " + this.state, this.requestUrl, false)
+          // this.card.isFavorited = false;
           console.log(this.card)
           
           // this.card.userId = window.localStorage.getItem("userId");
           // this.card.cityName = this.city + ", " + this.state;
           // this.card.cityAPIUrl = this.requestUrl;
           
+          console.log(this.location)
           // console.log(this.city)
           // console.log(this.state)
           // console.log(this.requestUrl)
@@ -131,11 +133,11 @@ export class WeatherCardPage {
     console.log("degrees changed")
     console.log(deg)
     
-    if (deg.checked === true) {
+    if (deg.checked === false) {
       this.low = this.lowF;
       this.high = this.highF;
     }
-    else if (deg.checked === false) {
+    else if (deg.checked === true) {
       this.low = this.lowC;
       this.high = this.highC;
     }
