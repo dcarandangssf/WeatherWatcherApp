@@ -27,6 +27,30 @@ export class LocationService {
       console.log('Hello SearchService Provider');
     }
 
+  searchLocation(cityName) {
+    this.weather.search(cityName)
+      .subscribe(
+        data => {
+          this.location = data;
+          console.log(this.location)
+          return this.location;
+          // this.city = data.location.city;
+          // this.cityParse = data.location.city.split(' ').join('_');
+          // this.state = data.location.state;
+          // this.requestUrl = data.location.requesturl;
+          // console.log(data.location)
+          // // console.log(this.requestUrl)
+          // this.getLocalForecast(this.cityParse, this.state)
+          // return {
+          //   "location": this.location,
+          //   "city": this.city,
+          //   "cityParse": this.cityParse,
+          //   "state": this.state,
+          //   "requestUrl": this.requestUrl,
+          // }
+        })
+  }
+  
   getLocation() {
     this.weather.local()
       .subscribe(

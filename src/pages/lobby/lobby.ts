@@ -59,6 +59,19 @@ export class LobbyPage {
       console.log(this.cardList)
       // this.card = this.weatherCardPage.getLocation();
       // console.log(this.card)
+      
+      this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+        .map(res => res.json())
+          .subscribe(res => {
+            // this.cardList = res;
+            this.cardList = res || [];
+            console.log("cardList")
+            console.log(this.cardList)
+            return this.cardList
+          }, err => {
+            alert("Warning Will Robinson!");
+            this.cardList = [];
+          });
     }
 
           // this.city = data.location.city;
@@ -76,18 +89,18 @@ export class LobbyPage {
     console.log('Hello LobbyPage Page');
     this.menu.swipeEnable(true, 'menu1');
     
-    this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
-      .map(res => res.json())
-        .subscribe(res => {
-          // this.cardList = res;
-          this.cardList = res || [];
-          console.log("cardList")
-          console.log(this.cardList)
-          return this.cardList
-        }, err => {
-          alert("Warning Will Robinson!");
-          this.cardList = [];
-        });
+    // this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+    //   .map(res => res.json())
+    //     .subscribe(res => {
+    //       // this.cardList = res;
+    //       this.cardList = res || [];
+    //       console.log("cardList")
+    //       console.log(this.cardList)
+    //       return this.cardList
+    //     }, err => {
+    //       alert("Warning Will Robinson!");
+    //       this.cardList = [];
+    //     });
   }
 
 

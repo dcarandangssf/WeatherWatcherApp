@@ -57,6 +57,7 @@ export class MyApp {
     //       alert("Warning Will Robinson!");
     //       // this.cardList = [];
     //     });
+    
       }
 
   initializeApp() {

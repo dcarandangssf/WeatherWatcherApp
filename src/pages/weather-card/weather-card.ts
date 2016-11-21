@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather'
 import { CardService } from '../../providers/card-service'
 import { Card } from '../../models/weather-card-model'
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the WeatherCard page.
@@ -143,4 +144,24 @@ export class WeatherCardPage {
     }
     
   }
+ 
+  searchLocation(cityName) {
+    console.log(cityName)
+    this.weather.search(cityName)
+      // .map(res => res.json())
+      .subscribe(
+        data => {
+      // .subscribe(
+      //   data => {
+          // this.location = data;
+          this.location = data;
+          console.log(this.location)
+          return this.location
+        })
+  }
+  
 }
+
+
+    // .map(res => res.json())
+    // .subscribe(res => {
