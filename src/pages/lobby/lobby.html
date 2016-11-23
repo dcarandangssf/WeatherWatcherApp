@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle (click)=getCardList($event)>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Lobby</ion-title>
@@ -15,20 +15,6 @@
   
     <page-weather-card></page-weather-card>
 
-    <ion-item *ngFor="let card of cardList; let i = index;">
-      City: {{card.cityName}}
-      #{{i + 1}}
-      <p>Model Id: {{card}}</p>
-      
-    <p text-center>{{card.cityName}}
-        <ion-item center>
-            <button ion-button danger (click)="deleteCity(card.id, i)">
-                <ion-icon name="trash"></ion-icon>
-                Delete
-            </button>
-        </ion-item>
-    </p>
-    
-    </ion-item>
+    <page-card-list (gotCardList)="gotCardList($event)"></page-card-list>
 
 </ion-content>

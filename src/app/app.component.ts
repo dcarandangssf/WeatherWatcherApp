@@ -12,7 +12,6 @@ import { CardService } from '../providers/card-service';
 
 @Component({
   templateUrl: 'app.html'
-  // `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -22,8 +21,6 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   cities: Array<{}>;
-
-  saved: any;
 
   constructor(
     public platform: Platform,
@@ -44,21 +41,8 @@ export class MyApp {
         { name: 'Los Angeles, CA' },
         { name: 'San Francisco, CA' }
       ];
-  
-    // this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
-    //   .map(res => res.json())
-    //     .subscribe(res => {
-    //       this.cardList = res;
-    //       // this.cardList = res || [];
-    //       console.log("cardList")
-    //       console.log(this.cardList)
-    //       return this.cardList
-    //     }, err => {
-    //       alert("Warning Will Robinson!");
-    //       // this.cardList = [];
-    //     });
     
-      }
+    }
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -105,9 +89,4 @@ export class MyApp {
     // this.nav.setRoot(LoginPage);
   }
   
-  // ionViewDidLeave() {
-  //   this.cities = this.cardService.getCardList()
-  //   console.log(this.cities)
-  // }
-      
 }

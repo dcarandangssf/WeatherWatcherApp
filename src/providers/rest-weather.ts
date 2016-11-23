@@ -4,12 +4,7 @@ import 'rxjs/add/operator/map';
 import { Geolocation } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
 
-/*
-  Generated class for the WeatherService provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class RestWeather {
   private appId = 'c56568eedbc03ac8';

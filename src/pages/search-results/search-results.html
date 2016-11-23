@@ -6,53 +6,52 @@
 
 <ion-list *ngIf="results">
   <ion-item *ngFor="let result of results" (click)=displayWeather(result)>
-    <p>{{ result }}</p>
     <p>{{ result.name }}</p>
   </ion-item>
 </ion-list>
 
-  <!--<ion-card *ngIf="">-->
+  <ion-card *ngIf="this.localForecast">
     
-  <!--  <ion-card-header>-->
-  <!--    <ion-item text-center primary>-->
-  <!--      <h1 #card.cityName>{{this.city}}, {{this.state}}</h1>-->
-  <!--    </ion-item>-->
-  <!--  </ion-card-header>-->
+    <ion-card-header>
+      <ion-item text-center primary>
+        <h1 #card.cityName>{{this.city}}, {{this.state}}</h1>
+      </ion-item>
+    </ion-card-header>
     
-  <!--  <ion-card-content width-50 offset-25>-->
-  <!--    <ion-item center text-center>-->
-  <!--      <h2>{{this.day}}</h2>-->
+    <ion-card-content width-50 offset-25>
+      <ion-item center text-center>
+        <h2>{{this.day}}</h2>
         
-  <!--      <ion-item text-center>-->
-  <!--        <p><strong>Forecast:</strong> {{this.forecast}}</p>-->
-  <!--      </ion-item>-->
+        <ion-item text-center>
+          <p><strong>Forecast:</strong> {{this.forecast}}</p>
+        </ion-item>
 
-  <!--      <ion-item text-center>-->
-  <!--        <ion-row center>-->
-  <!--          <ion-col center offset-25 width-50>-->
-  <!--            <p><strong>High</strong>: {{this.high}}°{{ this.deg.checked ? "C" : "F"}}</p>-->
-  <!--            <p><strong>Low</strong>: {{this.low}}°{{ this.deg.checked ? "C" : "F"}}</p>-->
-  <!--          </ion-col>-->
-  <!--        </ion-row>-->
-  <!--      </ion-item>-->
+        <ion-item text-center>
+          <ion-row center>
+            <ion-col center offset-25 width-50>
+              <p><strong>High</strong>: {{this.high}}°{{ this.deg.checked ? "C" : "F"}}</p>
+              <p><strong>Low</strong>: {{this.low}}°{{ this.deg.checked ? "C" : "F"}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
         
-  <!--    </ion-item>-->
-  <!--  </ion-card-content>-->
+      </ion-item>
+    </ion-card-content>
     
-  <!--    <ion-row baseline primary>-->
-  <!--      <ion-col>  -->
-  <!--        <button ion-button primary clear item-left (click)="saveFavorite(card)">-->
-  <!--          <ion-icon name="star"></ion-icon>-->
-  <!--          Save-->
-  <!--        </button>-->
-  <!--      </ion-col>-->
+      <ion-row baseline primary>
+        <ion-col>  
+          <button ion-button primary clear item-left (click)="saveFavorite(card)">
+            <ion-icon name="star"></ion-icon>
+            Save
+          </button>
+        </ion-col>
       
-  <!--      <ion-col>-->
-  <!--        <ion-item>-->
-  <!--          <ion-label text-right>°F/°C</ion-label>-->
-  <!--          <ion-toggle #deg checked="false" item-right (ionChange)="degrees(deg)"></ion-toggle>-->
-  <!--        </ion-item>-->
-  <!--      </ion-col>-->
-  <!--    </ion-row>-->
+        <ion-col>
+          <ion-item>
+            <ion-label text-right>°F/°C</ion-label>
+            <ion-toggle #deg checked="false" item-right (ionChange)="degrees(deg)"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     
-  <!--</ion-card>-->
+  </ion-card>

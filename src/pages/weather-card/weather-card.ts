@@ -5,12 +5,7 @@ import { CardService } from '../../providers/card-service'
 import { Card } from '../../models/weather-card-model'
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the WeatherCard page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-weather-card',
   templateUrl: 'weather-card.html'
@@ -40,25 +35,11 @@ export class WeatherCardPage {
     public weather: RestWeather,
     public cardService: CardService) {
       this.getLocation();
-      
-      // console.log("weatherCard: " + this.weatherCard)
-      // console.log(this.weatherCard)
-      // console.log("card: " + this.card)
-      // console.log(this.card)
-      // console.log(this.locationData)
     }
 
   ionViewDidLoad() {
     console.log('Hello WeatherCardPage Page');
   }
-
-  // card = {
-  //   "userId": "",
-  //   "cityName": "",
-  //   "cityAPIUrl": ""
-  // }
-
-  
 
   getLocation() {
     this.weather.local()
@@ -71,25 +52,10 @@ export class WeatherCardPage {
           this.requestUrl = data.location.requesturl;
           
           this.card = new Card("" , this.city + ", " + this.state, this.requestUrl, false)
-          // this.card.isFavorited = false;
           console.log(this.card)
           
-          // this.card.userId = window.localStorage.getItem("userId");
-          // this.card.cityName = this.city + ", " + this.state;
-          // this.card.cityAPIUrl = this.requestUrl;
-          
           console.log(this.location)
-          // console.log(this.city)
-          // console.log(this.state)
-          // console.log(this.requestUrl)
           this.getLocalForecast(this.cityParse, this.state)
-          // return this.locationData = {
-          //   "location": this.location,
-          //   "city": this.city,
-          //   "cityParse": this.cityParse,
-          //   "state": this.state,
-          //   "requestUrl": this.requestUrl,
-          // }
         })
   }
 
@@ -107,17 +73,6 @@ export class WeatherCardPage {
           
           this.low = this.lowF;
           this.high = this.highF;
-          
-          // console.log(this.localForecast);
-          // console.log(this.low);
-          // console.log(this.forecast);
-          // return this.forecastData = {
-          //   "localForecast": this.localForecast,
-          //   "low": this.low,
-          //   "high": this.high,
-          //   "day": this.day,
-          //   "forecast": this.forecast,
-          // }
         }
       )
   }
@@ -148,12 +103,8 @@ export class WeatherCardPage {
   searchLocation(cityName) {
     console.log(cityName)
     this.weather.search(cityName)
-      // .map(res => res.json())
       .subscribe(
         data => {
-      // .subscribe(
-      //   data => {
-          // this.location = data;
           this.location = data;
           console.log(this.location)
           return this.location
@@ -161,7 +112,3 @@ export class WeatherCardPage {
   }
   
 }
-
-
-    // .map(res => res.json())
-    // .subscribe(res => {
