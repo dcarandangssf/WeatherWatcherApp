@@ -21,24 +21,11 @@ import 'rxjs/add/operator/map';
   providers: [WeatherCardPage, SearchResultsPage, CardListPage]
 })
 export class LobbyPage {
-  public locationData: any;
-  public localForecast: any;
-  public city: any;
-  public cityParse: any;
-  public state: any;
-  public requestUrl: any;
-  public day: any;
-  public low: any;
-  public high: any;
-  public forecast: any;
-  public card: any;
   public cardList: any;
   
   constructor(
     public navCtrl: NavController,
     private menu: MenuController,
-    public weather: RestWeather,
-    public citiesRest: CitiesRest,
     public cardService: CardService) {
      
     }

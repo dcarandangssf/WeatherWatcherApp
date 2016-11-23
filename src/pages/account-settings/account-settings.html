@@ -41,17 +41,17 @@
         
         <ion-item>
             <ion-label floating>Old Password</ion-label>
-            <ion-textarea [(ngModel)]="user.password" name="password" required></ion-textarea>
+            <ion-input [(ngModel)]="user.password" name="password" required></ion-input>
         </ion-item>
         
         <ion-item>
             <ion-label floating>New Password</ion-label>
-            <ion-textarea [(ngModel)]="user.newPassword" name="password" required></ion-textarea>
+            <ion-input [(ngModel)]="user.newPassword" name="password" required></ion-input>
         </ion-item>
         
         <ion-item>
             <ion-label floating>Repeat New Password</ion-label>
-            <ion-textarea [(ngModel)]="user.repeatNewPassword" name="password" required></ion-textarea>
+            <ion-input [(ngModel)]="user.repeatNewPassword" name="password" required></ion-input>
         </ion-item>
         
         <button ion-button type="submit" block="true">Edit</button>

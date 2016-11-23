@@ -5,22 +5,23 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
+// import { CardListPage } from '../pages/card-list/card-list'
 
 import { RestWWUser } from '../providers/rest-ww-user';
 import { CitiesRest } from '../providers/cities-rest';
 import { CardService } from '../providers/card-service';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  // providers: [CardListPage]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   
   rootPage: any = LoginPage;
-
   pages: Array<{title: string, component: any}>;
-
   cities: Array<{}>;
+  public cardList: any;
 
   constructor(
     public platform: Platform,
@@ -34,7 +35,6 @@ export class MyApp {
         { title: 'Lobby', component: LobbyPage },
         { title: 'Account Settings', component: AccountSettingsPage }
       ];
-      
       
       this.cities = [
         { name: 'San Diego, CA' },
@@ -88,5 +88,9 @@ export class MyApp {
     // this.restWWUser.logout
     // this.nav.setRoot(LoginPage);
   }
+  
+  // gotCardList(cardList) {
+  //   this.cardList = cardList
+  // }
   
 }

@@ -29,6 +29,7 @@ export class WeatherCardPage {
   public highF: any;
   public lowC: any;
   public highC: any;
+  public icon: any;
   
   constructor(
     public navCtrl: NavController,
@@ -49,7 +50,11 @@ export class WeatherCardPage {
           this.city = data.location.city;
           this.cityParse = data.location.city.split(' ').join('_');
           this.state = data.location.state;
-          this.requestUrl = data.location.requesturl;
+          this.requestUrl = 'https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/' + this.state + '/' + this.cityParse + '.json';
+          
+          console.log(this.requestUrl)
+          // 'https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/' + this.state + '/' + this.cityParse + '.json'
+          // https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/CA/North_Clairemont.json
           
           this.card = new Card("" , this.city + ", " + this.state, this.requestUrl, false)
           console.log(this.card)
@@ -63,6 +68,7 @@ export class WeatherCardPage {
     this.weather.getForecast(city, state)
       .subscribe(
         data => {
+          console.log(data)
           this.localForecast = data;
           this.lowF = data.forecast.simpleforecast.forecastday["0"].low.fahrenheit;
           this.highF = data.forecast.simpleforecast.forecastday["0"].high.fahrenheit;
@@ -70,6 +76,7 @@ export class WeatherCardPage {
           this.highC = data.forecast.simpleforecast.forecastday["0"].high.celsius;
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
+          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url;
           
           this.low = this.lowF;
           this.high = this.highF;

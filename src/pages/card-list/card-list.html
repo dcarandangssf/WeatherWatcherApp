@@ -3,15 +3,13 @@
   #{{i + 1}}
   <p>Model Id: {{card.id}}</p>
   
-  <ion-item (click)="goToCity(card)">
+  <button ion-button outline block (click)="goToCity(card)">
     <p text-center>{{card.cityName}}</p>
-  </ion-item>
-  
-  <ion-item>
-      <button block ion-button danger (click)="deleteCity(card.id, i)">
-      <ion-icon name="trash"></ion-icon>
-          Delete
-      </button>
-  </ion-item>
+  </button>
+
+  <button block ion-button danger (click)="deleteCity(card.id, i)">
+  <ion-icon name="trash"></ion-icon>
+      Delete
+  </button>
 
 </ion-item>

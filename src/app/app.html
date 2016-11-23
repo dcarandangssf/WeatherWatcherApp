@@ -23,35 +23,16 @@
                 <h2><strong>Saved Cities</strong></h2>
             </ion-list-header>
             
-            <!--<button menuClose ion-item *ngFor="let c of cities; let i = index;" (click)="goToCity(c)">-->
+            <button menuClose ion-item *ngFor="let c of cities;" (click)="openCity(c)">
+                <p text-center>{{c.name}}</p>
+            </button>
             
-            <!--<button menuClose ion-item *ngFor="let c of cities;" (click)="goToCity(c)">-->
-            <!--    <p text-center>{{c.name}}-->
-            <!--        <ion-item center>-->
-            <!--            <button ion-button danger (click)="deleteCity(c)">-->
-            <!--                <ion-icon name="trash"></ion-icon>-->
-            <!--                Delete-->
-            <!--            </button>-->
-            <!--        </ion-item>-->
-            <!--    </p>-->
-            <!--</button>-->
             
-            <!--<ion-item *ngFor="let card of cardList; let i = index;">-->
-            <!--    City: {{card.cityName}}-->
-            <!--    #{{i + 1}}-->
-              
-            <!--    <p text-center>{{card.cityName}}-->
-            <!--        <ion-item center>-->
-            <!--            <button ion-button danger (click)="deleteCity(card)">-->
-            <!--                <ion-icon name="trash"></ion-icon>-->
-            <!--                Delete-->
-            <!--            </button>-->
-            <!--        </ion-item>-->
-            <!--    </p>-->
-            
-            <!--</ion-item>-->
-            
+            <button ion-item menuClose>
+                <button ion-button block text-center center><strong>Close Menu</strong></button>
+            </button>
         </ion-list>
+        
         
     </ion-content>
 

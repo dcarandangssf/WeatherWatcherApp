@@ -16,7 +16,13 @@
             <ion-label floating>Password</ion-label>
             <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
         </ion-item>
-        <button ion-button type="submit" block="true">Log in</button>
+        <ion-item>
+            <button ion-button type="submit" block="true">Log in</button>
+        </ion-item>
     </form>
-    <button ion-button block (click)="register()">Register</button>
+    
+        <ion-item>
+            <button ion-button block (click)="register()">Register</button>
+        </ion-item>
+    
 </ion-content>

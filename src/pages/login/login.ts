@@ -26,18 +26,15 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('Hello Landing Page');
+    this.menu.enable(false)
     this.menu.swipeEnable(false, 'menu1');
   }
 
+  ionViewDidLeave() {
+    this.menu.enable(true)
+  }
+
   user = {};
-  
-  // signinForm(form) {
-  //   console.log(this.user);
-  //   if (form.invalid) {
-  //     return alert("Please fill in all of the required fields.");
-  //   }
-  //   this.navCtrl.setRoot(LobbyPage);
-  // }
 
   signinForm(form) {
     console.log(this.user);

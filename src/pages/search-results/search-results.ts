@@ -31,6 +31,7 @@ export class SearchResultsPage {
   public highF: any;
   public lowC: any;
   public highC: any;
+  public icon: any;
 
   constructor(
     public navCtrl: NavController,
@@ -62,11 +63,12 @@ export class SearchResultsPage {
     this.weather.searchWeather(this.lat, this.lon)
       .subscribe(
           data => {
+            
             this.location = data.location;
             this.city = data.location.city;
             this.cityParse = data.location.city.split(' ').join('_');
             this.state = data.location.state;
-            this.requestUrl = data.location.requesturl;
+            this.requestUrl = 'https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/' + this.state + '/' + this.cityParse + '.json';
             
             this.card = new Card("" , this.city + ", " + this.state, this.requestUrl, false)
             console.log(this.card)
@@ -88,6 +90,7 @@ export class SearchResultsPage {
           this.highC = data.forecast.simpleforecast.forecastday["0"].high.celsius;
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
+          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url;
           
           this.low = this.lowF;
           this.high = this.highF;
