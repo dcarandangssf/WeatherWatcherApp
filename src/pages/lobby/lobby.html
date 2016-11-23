@@ -10,16 +10,10 @@
 </ion-header>
 
 <ion-content padding>
-  
-    <ion-searchbar #search
-                   (change)="onInput(search.value)" 
-                   placeholder="location/city name" 
-                   autocomplete="on">
-    </ion-searchbar>
 
+    <page-search-results></page-search-results>
   
-    <page-weather-card>
-    </page-weather-card>
+    <page-weather-card></page-weather-card>
 
     <ion-item *ngFor="let card of cardList; let i = index;">
       City: {{card.cityName}}

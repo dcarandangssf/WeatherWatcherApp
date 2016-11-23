@@ -5,6 +5,7 @@ import { CitiesRest } from '../../providers/cities-rest';
 // import { LocationService } from '../../providers/location-service'
 import { CardService } from '../../providers/card-service'
 import { WeatherCardPage } from '../weather-card/weather-card'
+import { SearchResultsPage } from '../search-results/search-results'
 import 'rxjs/add/operator/map';
 
 /*
@@ -16,7 +17,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-lobby',
   templateUrl: 'lobby.html',
-  providers: [WeatherCardPage]
+  providers: [WeatherCardPage, SearchResultsPage]
 })
 export class LobbyPage {
   public locationData: any;
@@ -40,7 +41,8 @@ export class LobbyPage {
     public citiesRest: CitiesRest,
     // public locationServ: LocationService,
     public cardService: CardService,
-    public weatherCardPage: WeatherCardPage) {
+    public weatherCardPage: WeatherCardPage,
+    public searchResultsPage: SearchResultsPage) {
       // this.locationData = this.locationServ.getLocation();
       // console.log(this.locationData);
       

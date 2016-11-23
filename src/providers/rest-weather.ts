@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Geolocation } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
@@ -32,15 +32,7 @@ export class RestWeather {
       let url = this.searchUrl
       url += "aq?query=" + query
       console.log(url)
-      let headers = new Headers({ 
-          'Accept': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-      }); // ... Set content type to JSON
-      
-      let options = new RequestOptions({ headers: headers }); // Create a request option
-      
-      
-      
+     
       this.http.get(url)
         .subscribe(
           data => {
@@ -55,6 +47,26 @@ export class RestWeather {
   }
 
 // http://autocomplete.wunderground.com/aq?query=San%20F
+
+  searchWeather(lat, lng) {
+    let Obs = Observable.create(observer => {
+          
+          let url = this.baseUrl + this.appId;
+          url += '/geolookup/q/';
+          url += `${lat},${lng}.json`;
+          
+          this.http.get(url)
+            .subscribe(
+              data => {
+                observer.next(data.json());
+              },
+              err => observer.error(err),
+              () => observer.complete()
+            )
+            
+        })
+    return Obs
+  }
 
   local() {
     let Obs = Observable.create(observer => {

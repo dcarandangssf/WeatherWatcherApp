@@ -1,10 +1,3 @@
-  <ion-searchbar #search
-                 (change)="searchLocation(search.value)" 
-                 placeholder="location/city name" 
-                 autocomplete="on">
-  </ion-searchbar>
-
-
   <ion-card>
     
     <ion-card-header>
@@ -15,8 +8,6 @@
     
     <ion-card-content width-50 offset-25>
       <ion-item center text-center>
-        <!--<p>Temperature: 73°F</p>-->
-        <!--<p>Forecast: Clear skys</p>-->
         <h2>{{this.day}}</h2>
         
         <ion-item text-center>
@@ -25,9 +16,6 @@
 
         <ion-item text-center>
           <ion-row center>
-            <!--<ion-col offset-25>-->
-              <!--<p>Low: {{this.low}}°{{ this.deg.checked ? "C" : "F"}}</p>-->
-            <!--</ion-col>-->
             <ion-col center offset-25 width-50>
               <p><strong>High</strong>: {{this.high}}°{{ this.deg.checked ? "C" : "F"}}</p>
               <p><strong>Low</strong>: {{this.low}}°{{ this.deg.checked ? "C" : "F"}}</p>
