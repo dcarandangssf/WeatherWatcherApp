@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { LobbyPage } from '../lobby/lobby';
+import { NavController, MenuController } from 'ionic-angular';
+import { LobbyMenuPage } from '../lobby-menu/lobby-menu';
 
 import { RestWWUser } from '../../providers/rest-ww-user';
 /*
@@ -16,10 +16,13 @@ import { RestWWUser } from '../../providers/rest-ww-user';
 export class AccountSettingsPage {
 
   constructor(public navCtrl: NavController,
+              private menu: MenuController,
               public restWWUser: RestWWUser) {}
 
   ionViewDidLoad() {
     console.log('Hello AccountSettingsPage Page');
+    this.menu.enable(true);
+    this.menu.swipeEnable(true, 'menu1');
   }
 
   user = {
@@ -40,7 +43,7 @@ export class AccountSettingsPage {
         .map(res => res.json())
         .subscribe(res => {
           console.log(res);
-          this.navCtrl.setRoot(LobbyPage);
+          this.navCtrl.setRoot(LobbyMenuPage);
         }, err => {
           console.log(err);
         });

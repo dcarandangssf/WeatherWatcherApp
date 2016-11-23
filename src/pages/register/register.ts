@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController } from 'ionic-angular';
+// pages
 import { LobbyPage } from '../lobby/lobby';
-
+// providers
 import { RestWWUser } from '../../providers/rest-ww-user';
-/*
-  Generated class for the Register page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
@@ -26,14 +23,6 @@ export class RegisterPage {
   }
   
   user = {};
-  
-  // signupForm(form) {
-  //   console.log(this.user);
-  //   if (form.invalid) {
-  //     return alert("Please fill in all of the required fields.");
-  //   }
-  //     this.navCtrl.setRoot(LobbyPage);
-  // }
   
   signupForm(form) {
     console.log(this.user);

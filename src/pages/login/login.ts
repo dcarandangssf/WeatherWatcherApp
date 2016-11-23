@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController } from 'ionic-angular';
 import { LobbyPage } from '../lobby/lobby';
+import { LobbyMenuPage } from '../lobby-menu/lobby-menu';
 import { RegisterPage } from '../register/register';
 
 import { RestWWUser } from '../../providers/rest-ww-user';
@@ -26,12 +27,12 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('Hello Landing Page');
-    this.menu.enable(false)
-    this.menu.swipeEnable(false, 'menu1');
+    // this.menu.enable(false)
+    // this.menu.swipeEnable(false, 'menu1');
   }
 
   ionViewDidLeave() {
-    this.menu.enable(true)
+    // this.menu.enable(true)
   }
 
   user = {};
@@ -47,7 +48,7 @@ export class LoginPage {
       console.log(res);
       window.localStorage.setItem('token', res.id);
       window.localStorage.setItem('userId', res.userId);
-      this.navCtrl.setRoot(LobbyPage);
+      this.navCtrl.setRoot(LobbyMenuPage);
     }, err => {
       console.log(err);
     });

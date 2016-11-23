@@ -1,20 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, Nav, MenuController } from 'ionic-angular';
-import { RestWeather } from '../../providers/rest-weather';
-import { CitiesRest } from '../../providers/cities-rest';
-// import { LocationService } from '../../providers/location-service'
-import { CardService } from '../../providers/card-service'
-import { WeatherCardPage } from '../weather-card/weather-card'
-import { SearchResultsPage } from '../search-results/search-results'
-import { CardListPage } from '../card-list/card-list'
 import 'rxjs/add/operator/map';
+//  pages
+import { WeatherCardPage } from '../weather-card/weather-card';
+import { SearchResultsPage } from '../search-results/search-results';
+import { CardListPage } from '../card-list/card-list';
+//  providers
+import { CardService } from '../../providers/card-service';
 
-/*
-  Generated class for the Lobby page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/  
 @Component({
   selector: 'page-lobby',
   templateUrl: 'lobby.html',
