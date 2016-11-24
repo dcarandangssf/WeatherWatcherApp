@@ -27,8 +27,8 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('Hello Landing Page');
-    // this.menu.enable(false)
-    // this.menu.swipeEnable(false, 'menu1');
+    this.menu.enable(false)
+    this.menu.swipeEnable(false, 'menu1');
   }
 
   ionViewDidLeave() {
@@ -48,6 +48,7 @@ export class LoginPage {
       console.log(res);
       window.localStorage.setItem('token', res.id);
       window.localStorage.setItem('userId', res.userId);
+      // this.navCtrl.setPages([{page: LobbyMenuPage}]);
       this.navCtrl.setRoot(LobbyMenuPage);
     }, err => {
       console.log(err);

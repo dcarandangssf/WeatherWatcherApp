@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather'
 import { CardService } from '../../providers/card-service'
 import { Card } from '../../models/weather-card-model'
@@ -30,9 +30,11 @@ export class WeatherCardPage {
   public lowC: any;
   public highC: any;
   public icon: any;
+  public savedCard: any;
   
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
     public weather: RestWeather,
     public cardService: CardService) {
       this.getLocation();
@@ -40,6 +42,7 @@ export class WeatherCardPage {
 
   ionViewDidLoad() {
     console.log('Hello WeatherCardPage Page');
+    this.navParams.get(this.savedCard)
   }
 
   getLocation() {
@@ -96,11 +99,11 @@ export class WeatherCardPage {
     console.log("degrees changed")
     console.log(deg)
     
-    if (deg.checked === false) {
+    if (deg.checked === true) {
       this.low = this.lowF;
       this.high = this.highF;
     }
-    else if (deg.checked === true) {
+    else if (deg.checked === false) {
       this.low = this.lowC;
       this.high = this.highC;
     }

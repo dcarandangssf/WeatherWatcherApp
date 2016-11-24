@@ -97,18 +97,21 @@
 
 
 /////////////////////sidemenu lobby app.component///////////////////////
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
+// import { LobbyMenuPage } from '../pages/lobby-menu/lobby-menu';
 
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = LoginPage;
+  
+  rootPage: any = LoginPage;
+  // rootPage: any = LobbyMenuPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

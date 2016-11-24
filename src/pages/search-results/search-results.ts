@@ -32,6 +32,7 @@ export class SearchResultsPage {
   public lowC: any;
   public highC: any;
   public icon: any;
+  public savedCard: any;
 
   constructor(
     public navCtrl: NavController,
@@ -78,7 +79,7 @@ export class SearchResultsPage {
             this.results = null
           })
   }
-  
+
   getLocalForecast(city, state) {
     this.weather.getForecast(city, state)
       .subscribe(

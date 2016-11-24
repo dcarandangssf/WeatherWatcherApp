@@ -10,6 +10,7 @@ import { CardService } from '../../providers/card-service'
 export class CardListPage {
   
   @Output() gotCardList = new EventEmitter();
+  @Output() getCard = new EventEmitter();
 
   public cardList: any;
   
@@ -48,7 +49,7 @@ export class CardListPage {
   goToCity(card) {
     console.log("display favorite city")
     console.log(card)
-    
+      this.getCard.emit(card)
   }
-  
+
 }

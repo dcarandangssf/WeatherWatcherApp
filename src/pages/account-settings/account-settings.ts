@@ -16,8 +16,10 @@ import { RestWWUser } from '../../providers/rest-ww-user';
 export class AccountSettingsPage {
 
   constructor(public navCtrl: NavController,
-              private menu: MenuController,
-              public restWWUser: RestWWUser) {}
+              public menu: MenuController,
+              public restWWUser: RestWWUser) {
+                this.menu.enable(true)
+              }
 
   ionViewDidLoad() {
     console.log('Hello AccountSettingsPage Page');

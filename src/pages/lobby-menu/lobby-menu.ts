@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 
 //  sidemenu pages
 import { LoginPage } from '../login/login';
-import { LobbyPage } from '../lobby/lobby';
+// import { LobbyPage } from '../lobby/lobby';
 import { AccountSettingsPage } from '../account-settings/account-settings';
 
 //  sidemenu providers
@@ -26,24 +26,27 @@ import { CardService } from '../../providers/card-service';
   providers: [WeatherCardPage, SearchResultsPage, CardListPage]
 })
 export class LobbyMenuPage {
-  @ViewChild(Nav) nav: Nav;
+  // @ViewChild(Nav) nav: Nav;
   // @ViewChild(NavController) navCtrl: NavController;
   
-  rootPage: any = LobbyPage;
+  rootPage: any;
   pages: Array<{title: string, component: any}>;
   cities: Array<{}>;
   public cardList: any;
+  public savedCard: any;
+  public cityName: any;
   
   constructor(
     public navCtrl: NavController,
     private menu: MenuController,
     public restWWUser: RestWWUser,
     public cardService: CardService,
+    public searchResultsPage: SearchResultsPage,
     public citiesService: CitiesRest) {
       
       // used for an example of ngFor and navigation
       this.pages = [
-        { title: 'Lobby', component: LobbyPage },
+        { title: 'LobbyMenu', component: LobbyMenuPage },
         { title: 'Account Settings', component: AccountSettingsPage }
       ];
      
@@ -58,15 +61,8 @@ export class LobbyMenuPage {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     
+    // this.nav.setRoot(page.component);
     this.navCtrl.setRoot(page.component);
-  }
-
-  goToCity(cardList) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    // this.nav.setRoot(cardList.component);
-    console.log(cardList)
-    console.log("sidemenu cardlist")
   }
   
   deleteCity(card) {
@@ -80,17 +76,27 @@ export class LobbyMenuPage {
     .map(res => res.json())
     .subscribe(res => {
       window.localStorage.clear();
+      // this.nav.setRoot(LoginPage);
       this.navCtrl.setRoot(LoginPage);
     }, err => {
       //because this is logging the user out, we don't need to worry about this here.
       // alert("Something went really wrong.");
       window.localStorage.clear();
+      // this.nav.setRoot(LoginPage);
       this.navCtrl.setRoot(LoginPage);
     });
   }
-  
+
   gotCardList(cardList) {
     this.cardList = cardList
   }
-  
+
+  getCard(card) {
+    this.savedCard = card
+    
+    console.log("savedCard: ")
+    console.log(this.savedCard)
+    this.navCtrl.setRoot(LobbyMenuPage)
+  }
+
 }
