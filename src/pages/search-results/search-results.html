@@ -52,7 +52,7 @@
       
         <ion-col>
           <ion-item>
-            <ion-label text-right>°F/°C</ion-label>
+            <ion-label text-right>°{{ this.deg.checked ? "F" : "C"}}</ion-label>
             <ion-toggle #deg checked="false" item-right (ionChange)="degrees(deg)"></ion-toggle>
           </ion-item>
         </ion-col>

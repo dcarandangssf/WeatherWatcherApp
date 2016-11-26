@@ -155,5 +155,26 @@ export class LobbyPage {
       )
   }
   
+  saveFavorite(card) {
+    console.log("favorite saved")
+    card.userId = window.localStorage.getItem("userId")
+    card.cityAPIUrl = this.requestUrl
+    this.cardService.saveCard(card)
+    console.log(card)
+  }
   
+  degrees(deg) {
+    console.log("degrees changed")
+    console.log(deg)
+    
+    if (deg.checked === false) {
+      this.low = this.lowF;
+      this.high = this.highF;
+    }
+    else if (deg.checked === true) {
+      this.low = this.lowC;
+      this.high = this.highC;
+    }
+    
+  }
 }

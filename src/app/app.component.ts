@@ -37,6 +37,7 @@ export class MyApp {
         { title: 'Account Settings', component: AccountSettingsPage }
       ];
   
+      this.isOpen = false
     }
 
   initializeApp() {
@@ -120,11 +121,7 @@ export class MyApp {
   
   openSavedCities() {
     this.getCardList()
-    this.isOpen = true
-  }
-  
-  closeSavedCities() {
-    this.isOpen = false
+    this.isOpen = !this.isOpen
   }
   
 }
