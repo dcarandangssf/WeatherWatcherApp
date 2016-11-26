@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather';
 import { Card } from '../../models/weather-card-model'
@@ -10,6 +10,8 @@ import { CardService } from '../../providers/card-service'
   templateUrl: 'search-results.html'
 })
 export class SearchResultsPage {
+  @Input() savedCard;
+  
   public results: any;
   public lat: any;
   public lon: any;
@@ -32,11 +34,23 @@ export class SearchResultsPage {
   public lowC: any;
   public highC: any;
   public icon: any;
+  public savedResults: any;
+  public savedResult: any;
 
   constructor(
     public navCtrl: NavController,
     public weather: RestWeather,
-    public cardService: CardService) {}
+    public cardService: CardService) {
+      // if(this.savedCard) {
+      //   console.log('savedCard!')
+      //   console.log(this.savedCard)
+      //   this.savedResults = this.searchLocation(this.savedCard)
+      //   this.savedResult = this.savedResults[0]
+      //   console.log('savedResult')
+      //   console.log(this.savedResult)
+      //   // this.displayWeather(this.savedResult)
+      // }
+    }
 
   ionViewDidLoad() {
     console.log('Hello SearchResultsPage Page');
@@ -50,6 +64,7 @@ export class SearchResultsPage {
           this.results = data.RESULTS;
           console.log(this.results)
           return this.results
+          // return data
         }
       )
   }
