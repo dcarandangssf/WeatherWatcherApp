@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { NavController, Nav, MenuController } from 'ionic-angular';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { NavController, Nav, MenuController, NavParams } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather';
 import { CitiesRest } from '../../providers/cities-rest';
 // import { LocationService } from '../../providers/location-service'
@@ -21,22 +21,43 @@ import 'rxjs/add/operator/map';
   providers: [WeatherCardPage, SearchResultsPage, CardListPage]
 })
 export class LobbyPage {
+  // @Output() gotSavedCard = new EventEmitter();
   public cardList: any;
+  public savedCard: any;
+  public results: any;
   
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
     private menu: MenuController,
-    public cardService: CardService) {
+    public cardService: CardService,
+    public searchResultsPage: SearchResultsPage) {
      
     }
     
   ionViewDidLoad() {
     console.log('Hello LobbyPage Page');
     this.menu.swipeEnable(true, 'menu1');
+    this.savedCard = this.navParams.get('card')
+    console.log('savedCard')
+    console.log(this.savedCard)
+    // this.gotSavedCard.emit(this.savedCard)
+    
+    
+    //  currently unable to retrive data from search
+    
+    this.results = this.searchResultsPage.searchLocation(this.savedCard.cityName)
+    console.log('results')
+    console.log(this.results)
+    // this.searchResultsPage.displayWeather(this.results[0])
   }
   
   // gotCardList(cardList) {
   //   this.cardList = cardList
+  // }
+  
+  // gotSavedCard(savedCard) {
+    
   // }
   
 }

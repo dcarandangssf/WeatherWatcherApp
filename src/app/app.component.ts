@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
@@ -26,6 +26,7 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
+    public menu: MenuController,
     public restWWUser: RestWWUser,
     public cardService: CardService,
     public citiesService: CitiesRest) {
@@ -111,7 +112,10 @@ export class MyApp {
   goToCity(card) {
     console.log("display favorite city")
     console.log(card)
-    
+    this.menu.close()
+    this.nav.setRoot(LobbyPage, {
+      'card': card
+    })
   }
   
   openSavedCities() {

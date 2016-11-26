@@ -29,9 +29,9 @@
                 </button>
             </ion-list-header>
             
-            <button menuClose ion-item *ngFor="let c of cities;" (click)="openCity(c)">
-                <p text-center>{{c.name}}</p>
-            </button>
+            <!--<button menuClose ion-item *ngFor="let c of cities;" (click)="openCity(c)">-->
+            <!--    <p text-center>{{c.name}}</p>-->
+            <!--</button>-->
             
             <!--<page-card-list menuClose (gotCardList)="gotCardList($event)"></page-card-list>-->
 
@@ -40,18 +40,29 @@
 
             <div *ngIf="this.isOpen">
                 <ion-item *ngFor="let card of cardList; let i = index;">
-                  City: {{card.cityName}}
-                  #{{i + 1}}
+                    
+                <ion-row>
+                  <ion-col offset-25 width-50>City: {{card.cityName}}</ion-col>
+                  <ion-col offset-25 width-50>#{{i + 1}}</ion-col>
                   <p>Model Id: {{card.id}}</p>
+                </ion-row>
                   
-                  <button ion-button outline block (click)="goToCity(card)">
-                    <p text-center>{{card.cityName}}</p>
-                  </button>
+                <ion-row>
+                  <ion-col offset-33 width-33>
+                      <button ion-button outline block (click)="goToCity(card)">
+                          <p text-center>{{card.cityName}}</p>
+                      </button>
+                  </ion-col>
+                </ion-row>
                 
-                  <button block ion-button danger (click)="deleteCity(card.id, i)">
-                  <ion-icon right name="trash"></ion-icon>
-                      Delete
-                  </button>
+                <ion-row>
+                  <ion-col offset-33 width-33>
+                      <button block ion-button danger (click)="deleteCity(card.id, i)">
+                          <ion-icon right name="trash"></ion-icon>
+                              Delete
+                      </button>
+                  </ion-col>
+                </ion-row>
                 
                 </ion-item>
             </div>
