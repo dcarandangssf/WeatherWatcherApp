@@ -96,11 +96,11 @@ export class WeatherCardPage {
     console.log("degrees changed")
     console.log(deg)
     
-    if (deg.checked === false) {
+    if (deg.checked === true) {
       this.low = this.lowF;
       this.high = this.highF;
     }
-    else if (deg.checked === true) {
+    else if (deg.checked === false) {
       this.low = this.lowC;
       this.high = this.highC;
     }

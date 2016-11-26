@@ -35,8 +35,8 @@ export class LobbyPage {
     this.menu.swipeEnable(true, 'menu1');
   }
   
-  gotCardList(cardList) {
-    this.cardList = cardList
-  }
+  // gotCardList(cardList) {
+  //   this.cardList = cardList
+  // }
   
 }

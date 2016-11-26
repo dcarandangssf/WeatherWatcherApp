@@ -20,14 +20,46 @@
             </button>
             
             <ion-list-header>
-                <h2><strong>Saved Cities</strong></h2>
+                <button ion-button (click)="openSavedCities()">
+                    <strong>Saved Cities</strong>
+                    <!--<h2><strong>Saved Cities</strong></h2>-->
+                </button>
+                <button ion-button (click)="closeSavedCities()">
+                    close
+                </button>
             </ion-list-header>
             
             <button menuClose ion-item *ngFor="let c of cities;" (click)="openCity(c)">
                 <p text-center>{{c.name}}</p>
             </button>
             
-            
+            <!--<page-card-list menuClose (gotCardList)="gotCardList($event)"></page-card-list>-->
+
+
+<!------------------------------------------------------------------------------------------------>
+
+            <div *ngIf="this.isOpen">
+                <ion-item *ngFor="let card of cardList; let i = index;">
+                  City: {{card.cityName}}
+                  #{{i + 1}}
+                  <p>Model Id: {{card.id}}</p>
+                  
+                  <button ion-button outline block (click)="goToCity(card)">
+                    <p text-center>{{card.cityName}}</p>
+                  </button>
+                
+                  <button block ion-button danger (click)="deleteCity(card.id, i)">
+                  <ion-icon right name="trash"></ion-icon>
+                      Delete
+                  </button>
+                
+                </ion-item>
+            </div>
+
+
+<!------------------------------------------------------------------------------------------------>
+
+
             <button ion-item menuClose>
                 <button ion-button block text-center center><strong>Close Menu</strong></button>
             </button>
@@ -37,6 +69,8 @@
     </ion-content>
 
 </ion-menu>
+
+<!--<page-menu></page-menu>-->
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false" persistent="true"></ion-nav>

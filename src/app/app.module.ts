@@ -9,6 +9,7 @@ import { AccountSettingsPage } from '../pages/account-settings/account-settings'
 import { SavedCitiesPage } from '../pages/saved-cities/saved-cities';
 import { WeatherCardPage } from '../pages/weather-card/weather-card';
 import { CardListPage } from '../pages/card-list/card-list';
+import { MenuPage } from '../pages/menu/menu';
 
 import { RestWeather } from '../providers/rest-weather';
 import { RestWWUser } from '../providers/rest-ww-user';
@@ -26,7 +27,8 @@ import { CardService } from '../providers/card-service';
     AccountSettingsPage,
     SavedCitiesPage,
     WeatherCardPage,
-    CardListPage
+    CardListPage,
+    MenuPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -41,13 +43,15 @@ import { CardService } from '../providers/card-service';
     AccountSettingsPage,
     SavedCitiesPage,
     WeatherCardPage,
-    CardListPage
+    CardListPage,
+    MenuPage
   ],
   providers: [
     RestWeather,
     RestWWUser,
     CitiesRest,
     LocationService,
-    CardService]
+    CardService
+  ]
 })
 export class AppModule {}

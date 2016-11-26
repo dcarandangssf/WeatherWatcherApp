@@ -5,15 +5,15 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
-// import { CardListPage } from '../pages/card-list/card-list'
 
 import { RestWWUser } from '../providers/rest-ww-user';
 import { CitiesRest } from '../providers/cities-rest';
 import { CardService } from '../providers/card-service';
 
 @Component({
-  templateUrl: 'app.html',
-  // providers: [CardListPage]
+  templateUrl: 'app.html'
+  // `<ion-nav [root]="rootPage"></ion-nav>`
+  // providers: [NavController]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -21,7 +21,8 @@ export class MyApp {
   rootPage: any = LoginPage;
   pages: Array<{title: string, component: any}>;
   cities: Array<{}>;
-  public cardList: any;
+  cardList: any;
+  isOpen: any;
 
   constructor(
     public platform: Platform,
@@ -29,19 +30,12 @@ export class MyApp {
     public cardService: CardService,
     public citiesService: CitiesRest) {
       this.initializeApp();
-
       // used for an example of ngFor and navigation
       this.pages = [
         { title: 'Lobby', component: LobbyPage },
         { title: 'Account Settings', component: AccountSettingsPage }
       ];
-      
-      this.cities = [
-        { name: 'San Diego, CA' },
-        { name: 'Los Angeles, CA' },
-        { name: 'San Francisco, CA' }
-      ];
-    
+  
     }
 
   initializeApp() {
@@ -59,19 +53,19 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  goToCity(cardList) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    // this.nav.setRoot(cardList.component);
-    console.log(cardList)
-    console.log("sidemenu cardlist")
-  }
+  // goToCity(cardList) {
+  //   // Reset the content nav to have just this page
+  //   // we wouldn't want the back button to show in this scenario
+  //   // this.nav.setRoot(cardList.component);
+  //   console.log(cardList)
+  //   console.log("sidemenu cardlist")
+  // }
   
-  deleteCity(card) {
-    console.log("city deleted")
-    console.log(card)
-    this.cardService.deleteCard(card)
-  }
+  // deleteCity(card) {
+  //   console.log("city deleted")
+  //   console.log(card)
+  //   this.cardService.deleteCard(card)
+  // }
 
   logout(token) {
     this.restWWUser.logout(window.localStorage.getItem('token'))
@@ -85,12 +79,48 @@ export class MyApp {
       window.localStorage.clear();
       this.nav.setRoot(LoginPage);
     });
-    // this.restWWUser.logout
-    // this.nav.setRoot(LoginPage);
   }
   
   // gotCardList(cardList) {
   //   this.cardList = cardList
   // }
+  
+////////////////////////////////////////////////////////////////////////////////////////
+
+  getCardList() {
+    this.cardService.getCardList(window.localStorage.getItem('userId'), window.localStorage.getItem('token'))
+      .map(res => res.json())
+        .subscribe(res => {
+          this.cardList = res || [];
+          console.log("cardList")
+          console.log(this.cardList)
+          return this.cardList
+        }, err => {
+          alert("Warning Will Robinson!");
+          this.cardList = [];
+        });
+  }
+
+  deleteCity(cardId, index) {
+    console.log("city deleted")
+    console.log(cardId)
+    this.cardService.deleteCard(cardId)
+    this.cardList.splice(index, 1)
+  }
+  
+  goToCity(card) {
+    console.log("display favorite city")
+    console.log(card)
+    
+  }
+  
+  openSavedCities() {
+    this.getCardList()
+    this.isOpen = true
+  }
+  
+  closeSavedCities() {
+    this.isOpen = false
+  }
   
 }
