@@ -7,9 +7,8 @@
 </ion-header>
 
 <ion-content>
-    
     <img src="https://static.pexels.com/photos/125510/pexels-photo-125510.jpeg"/>
-    
+        
     <ion-col>
         <h1 text-center color="light">
             <strong>Weather Watcher App</strong>
@@ -18,26 +17,23 @@
     
     <ion-col offset-10 width-80>
         <ion-card>
-            <!--<div>-->
-                <form #loginForm="ngForm" (ngSubmit)="signinForm(loginForm)">
-                    <ion-item>
-                        <ion-label floating>Email</ion-label>
-                        <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label floating>Password</ion-label>
-                        <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <button ion-button type="submit" block="true">Log in</button>
-                    </ion-item>
-                </form>
-            
+            <form #loginForm="ngForm" (ngSubmit)="signinForm(loginForm)">
                 <ion-item>
-                    <button ion-button block (click)="register()">Register</button>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
                 </ion-item>
-            <!--</div>-->
+                <ion-item>
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <button ion-button type="submit" block="true">Log in</button>
+                </ion-item>
+            </form>
+        
+            <ion-item>
+                <button ion-button block (click)="register()">Register</button>
+            </ion-item>
         </ion-card>
     </ion-col>
-    
 </ion-content>
