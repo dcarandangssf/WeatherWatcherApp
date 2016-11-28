@@ -12,6 +12,7 @@ page-login {
         width: 100%;
         top: 0;
         left: 0;
+        // max-height: 1080px;
     }
     
     .content {
@@ -21,6 +22,8 @@ page-login {
         left: 0%;
         width: 100%;
         opacity: 0.8;
+        max-width: 500px;
+        margin: auto;
     }
     
 }
