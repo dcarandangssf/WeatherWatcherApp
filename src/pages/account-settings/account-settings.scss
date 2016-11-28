@@ -12,21 +12,17 @@ page-account-settings {
     ion-content {
         position: relative;
         text-align: center;
+        opacity: 0.8;
     }
     
-    // img {
-    //     position: absolute;
-    //     z-index: -1;
-    //     height: 100%;
-    //     width: 100%;
-    //     top: 0;
-    //     left: 0;
-    // }
+    ion-card {
+        opacity: 0.8;
+    }
     
     .content {
         position: relative;
         text-align: center;
-        top: 100px;
+        top: 90px;
         left: 10%;
         width: 80%;
         opacity: 0.8;

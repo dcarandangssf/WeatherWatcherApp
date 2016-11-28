@@ -98,7 +98,7 @@ export class MyApp {
           console.log(this.cardList)
           return this.cardList
         }, err => {
-          alert("Warning Will Robinson!");
+          console.log(err.statusText);
           this.cardList = [];
         });
   }
@@ -124,4 +124,7 @@ export class MyApp {
     this.isOpen = !this.isOpen
   }
   
+  menuClose() {
+    this.isOpen = false
+  }
 }
