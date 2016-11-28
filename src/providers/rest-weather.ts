@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class RestWeather {
-  private appId = 'c56568eedbc03ac8';
+  private appId = '361c63784c396a68';
   private baseUrl = 'https://api.wunderground.com/api/';
   private searchUrl = '/autocomplete/';
   // private searchUrl = 'https://autocomplete.wunderground.com/';

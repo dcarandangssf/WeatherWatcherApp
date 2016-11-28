@@ -39,22 +39,26 @@
                     
                     <ion-card>
                         
-                        <ion-card-header>
-                            <ion-item text-center>
+                        <!--<ion-card-header>-->
+                        <!--    <ion-item text-center>-->
                                 
-                                <span item-left>
-                                    City/Location #{{i + 1}}:
-                                </span>
+                        <!--        <span item-left>-->
+                        <!--            City/Location #{{i + 1}}:-->
+                        <!--        </span>-->
                                 
-                                <ion-icon name="trash" item-right small color="danger" (click)="deleteCity(card.id, i)"></ion-icon>
+                        <!--        <ion-icon name="trash" item-right small color="danger" (click)="deleteCity(card.id, i)"></ion-icon>-->
                                 
-                            </ion-item>
-                        </ion-card-header>
+                        <!--    </ion-item>-->
+                        <!--</ion-card-header>-->
                         
                         <ion-card-content text-center>
+                            
                             <span ion-button outline clear item-left (click)="goToCity(card)">
                                 {{card.cityName}}
                             </span>
+                            
+                            <ion-icon name="trash" item-right color="danger" (click)="deleteCity(card.id, i)"></ion-icon>
+                            
                         </ion-card-content>
                         
                     </ion-card>

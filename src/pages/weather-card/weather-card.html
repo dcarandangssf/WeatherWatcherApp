@@ -1,6 +1,6 @@
 <div class="container-background">
   
-
+  <ion-col class="card-container">
     <ion-card>
       
         <ion-card-header>
@@ -8,18 +8,18 @@
             <h1 #card.cityName>{{this.city}}, {{this.state}}</h1>
           </ion-item>
         </ion-card-header>
-        
+
         <ion-card-content>
-          
+
           <ion-item text-center>
             <h2>{{this.day}}</h2>
-            
+
             <ion-item>
               <ion-col offset-33 width-33>
                 <img src="{{this.icon2}}">
               </ion-col>
             </ion-item>
-            
+
             <ion-item text-center text-wrap>
               <p><strong>Forecast:</strong> {{this.deg.checked ? this.forecast : this.forecastC}}</p>
             </ion-item>
@@ -57,5 +57,5 @@
         </div>
         
     </ion-card>
-    
+  </ion-col>
 </div>

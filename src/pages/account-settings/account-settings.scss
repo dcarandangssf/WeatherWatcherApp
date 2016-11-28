@@ -3,8 +3,8 @@ page-account-settings {
     img {
         position: absolute;
         z-index: -1;
-        height: 200%;
-        width: 200%;
+        height: 100%;
+        width: 100%;
         top: 0;
         left: 0;
     }
@@ -12,19 +12,14 @@ page-account-settings {
     ion-content {
         position: relative;
         text-align: center;
-        opacity: 0.8;
-    }
-    
-    ion-card {
-        opacity: 0.9;
     }
     
     .content {
         position: relative;
         text-align: center;
         top: 90px;
-        left: 10%;
-        width: 80%;
+        left: 0%;
+        width: 100%;
         opacity: 0.8;
     }
     
