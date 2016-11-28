@@ -6,7 +6,6 @@ import { RegisterPage } from '../pages/register/register';
 import { LobbyPage } from '../pages/lobby/lobby';
 import { SearchResultsPage } from '../pages/search-results/search-results';
 import { AccountSettingsPage } from '../pages/account-settings/account-settings';
-import { SavedCitiesPage } from '../pages/saved-cities/saved-cities';
 import { WeatherCardPage } from '../pages/weather-card/weather-card';
 import { CardListPage } from '../pages/card-list/card-list';
 import { MenuPage } from '../pages/menu/menu';
@@ -25,7 +24,6 @@ import { CardService } from '../providers/card-service';
     LobbyPage,
     SearchResultsPage,
     AccountSettingsPage,
-    SavedCitiesPage,
     WeatherCardPage,
     CardListPage,
     MenuPage
@@ -41,7 +39,6 @@ import { CardService } from '../providers/card-service';
     LobbyPage,
     SearchResultsPage,
     AccountSettingsPage,
-    SavedCitiesPage,
     WeatherCardPage,
     CardListPage,
     MenuPage

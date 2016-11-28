@@ -16,8 +16,10 @@ export class CardListPage {
   constructor(
     public navCtrl: NavController,
     public cardService: CardService) {
-      this.getCardList()
-      this.gotCardList.emit(this.cardList);
+      if(this.cardList === undefined) {
+        this.getCardList()
+        this.gotCardList.emit(this.cardList);
+      }
     }
 
   ionViewDidLoad() {

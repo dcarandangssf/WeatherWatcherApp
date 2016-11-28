@@ -37,7 +37,9 @@ export class WeatherCardPage {
     public weather: RestWeather,
     public toastController: ToastController,
     public cardService: CardService) {
-      this.getLocation();
+      if(this.location === undefined) {
+        this.getLocation();
+      }
     }
 
   ionViewDidLoad() {
