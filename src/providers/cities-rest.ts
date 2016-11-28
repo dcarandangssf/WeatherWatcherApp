@@ -33,9 +33,7 @@ export class CitiesRest {
     return this.http.get(
       this.baseUrl + this.path +
         '?filter[where][userId]=' + userId +
-        // '?filter%7B%22WHERE%22%3A%20%7B%22userId%22%3A%20%22' + userId +
         '&access_token=' + token
-        // '%22%7D%7D&access_token=' + token
     )
   }
 

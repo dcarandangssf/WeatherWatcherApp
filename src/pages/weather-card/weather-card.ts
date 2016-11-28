@@ -17,6 +17,7 @@ export class WeatherCardPage {
   public state: any;
   public requestUrl: any;
   public forecast: any;
+  public forecastC: any;
   public location: any;
   public localForecast: any;
   public low: any;
@@ -80,6 +81,7 @@ export class WeatherCardPage {
           this.highC = data.forecast.simpleforecast.forecastday["0"].high.celsius;
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
+          this.forecastC = data.forecast.txt_forecast.forecastday["0"].fcttext_metric;
           this.icon2 = data.forecast.txt_forecast.forecastday["0"].icon_url;
           this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url.split('p').join('ps');
           console.log('this.icon')
