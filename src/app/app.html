@@ -15,57 +15,52 @@
             </ion-list-header>
             
             <ion-col text-center *ngFor="let p of pages;">
-                <button menuClose ion-button small outline round color="primary" (click)="openPage(p)">
+                <button menuClose ion-button small outline block color="primary" (click)="openPage(p)">
                    {{p.title}}
                 </button>
             </ion-col>
             
             <ion-col text-center>
-                <button menuClose ion-button small outline round color="primary" (click)="logout()">
+                <button menuClose ion-button small outline block color="primary" (click)="logout()">
                     Logout
                 </button>
             </ion-col>
             
-            <ion-col text-center>
-                <button ion-button small outline round (click)="openSavedCities()">
-                    Saved Cities
-                </button>
-            </ion-col>
+            
+            <button ion-button outline full color="dark" (click)="openSavedCities()">
+                Saved Cities
+            </button>
+            
 <!------------------------------------------------------------------------------------------------>
 
             <div *ngIf="this.isOpen">
+                
                 <ion-item *ngFor="let card of cardList; let i = index;">
                     
                     <ion-card>
                         
                         <ion-card-header>
-                            <ion-row>
-                              <ion-col text-center>City/Location #{{i + 1}}:</ion-col>
-                            </ion-row>
+                            <ion-item text-center>
+                                
+                                <span item-left>
+                                    City/Location #{{i + 1}}:
+                                </span>
+                                
+                                <ion-icon name="trash" item-right small color="danger" (click)="deleteCity(card.id, i)"></ion-icon>
+                                
+                            </ion-item>
                         </ion-card-header>
                         
-                        <ion-card-content>
-                            <ion-row>
-                              <ion-col text-center center>
-                                  <button ion-button outline round small (click)="goToCity(card)">
-                                      <p text-center>{{card.cityName}}</p>
-                                  </button>
-                              </ion-col>
-                            </ion-row>
+                        <ion-card-content text-center>
+                            <span ion-button outline clear item-left (click)="goToCity(card)">
+                                {{card.cityName}}
+                            </span>
                         </ion-card-content>
-                        
-                        <ion-row baseline>
-                            <ion-col text-center center3>
-                                <button ion-button outline round small color="danger" (click)="deleteCity(card.id, i)">
-                                    <ion-icon right name="trash"></ion-icon>
-                                        Delete
-                                </button>
-                            </ion-col>
-                        </ion-row>
                         
                     </ion-card>
                 
                 </ion-item>
+                
             </div>
 
 <!------------------------------------------------------------------------------------------------>
