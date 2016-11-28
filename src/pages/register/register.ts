@@ -27,14 +27,6 @@ export class RegisterPage {
   
   user = {};
   
-  // signupForm(form) {
-  //   console.log(this.user);
-  //   if (form.invalid) {
-  //     return alert("Please fill in all of the required fields.");
-  //   }
-  //     this.navCtrl.setRoot(LobbyPage);
-  // }
-  
   signupForm(form) {
     console.log(this.user);
     if (form.invalid) {
@@ -46,8 +38,15 @@ export class RegisterPage {
       window.localStorage.setItem('token', res.token);
       window.localStorage.setItem('userId', res.id);
       this.navCtrl.setRoot(LobbyPage);
+        if (res.status === 422) {
+          console.log(res)
+          alert("Email is already taken")
+        }
     }, err => {
-      alert("Uh ohes!");
+      console.log(err);
+        if (err.status === 422) {
+          alert("Email is already taken")
+        }
     });
   }
 }

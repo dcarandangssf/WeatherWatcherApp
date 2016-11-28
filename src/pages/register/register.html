@@ -7,35 +7,45 @@
 </ion-header>
 
 
-<ion-content padding>
-    <form #registerForm="ngForm" (ngSubmit)="signupForm(registerForm)">
-      
-        <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="text" [(ngModel)]="user.email" name="email" required></ion-input>
-        </ion-item>
+<ion-content>
+    
+    <img class="background" src="https://static.pexels.com/photos/125510/pexels-photo-125510.jpeg"/>
+    
+    <div class="content">
         
-        <ion-item>
-            <ion-label floating>First Name</ion-label>
-            <ion-input type="text" [(ngModel)]="user.firstName" name="firstName" required></ion-input>
-        </ion-item>
+        <form #registerForm="ngForm" (ngSubmit)="signupForm(registerForm)">
+          
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>First Name</ion-label>
+                <ion-input type="text" [(ngModel)]="user.firstName" name="firstName" required></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Last Name</ion-label>
+                <ion-input type="text" [(ngModel)]="user.lastName" name="lastName" required></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Organization</ion-label>
+                <ion-input type="text" [(ngModel)]="user.organization" name="organization"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
+            </ion-item>
+            
+            <ion-item>
+                <button ion-button type="submit" block="true">Login</button>
+            </ion-item>
+            
+        </form>
         
-        <ion-item>
-            <ion-label floating>Last Name</ion-label>
-            <ion-input type="text" [(ngModel)]="user.lastName" name="lastName" required></ion-input>
-        </ion-item>
-        
-        <ion-item>
-            <ion-label floating>Organization</ion-label>
-            <ion-input type="text" [(ngModel)]="user.organization" name="organization"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-textarea [(ngModel)]="user.password" name="password" required></ion-textarea>
-        </ion-item>
-        
-        <button ion-button type="submit" block="true">Login</button>
-        
-    </form>
+    </div>
+    
 </ion-content>

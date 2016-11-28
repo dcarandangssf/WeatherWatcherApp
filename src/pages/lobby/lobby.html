@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle (click)=getCardList($event)>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Lobby</ion-title>
@@ -11,14 +11,80 @@
 
 <ion-content padding>
   
-    <ion-searchbar #search
-                   (change)="onInput(search.value)" 
-                   placeholder="location/city name" 
-                   autocomplete="on">
-    </ion-searchbar>
+  <img class="background" src="https://static.pexels.com/photos/125510/pexels-photo-125510.jpeg">  
 
+  <page-search-results [savedCard]="savedCard" (gotSavedCard)="gotSavedCard($event)"></page-search-results>
+
+<!------------------------------------------------------------------------------------------------------------>
+
+  <ion-col offset-10 width-80>
+    
+        <ion-card *ngIf="this.localForecast">
+          
+          <ion-card-header>
+            <ion-item text-center primary text-wrap>
+              <h1 #card.cityName>{{this.city}}, {{this.state}}</h1>
+            </ion-item>
+          </ion-card-header>
+          
+          <ion-card-content>
+            
+            <ion-item text-center>
+              <h2>{{this.day}}</h2>
+              
+              <ion-item>
+                <ion-col offset-33 width-33>
+                  <img src="{{this.icon2}}">
+                </ion-col>
+              </ion-item>
+              
+              <ion-item text-center text-wrap>
+                <p><strong>Forecast:</strong> {{this.forecast}}</p>
+              </ion-item>
+      
+              <ion-item text-center>
+                <ion-row>
+                  <ion-col>
+                    <p><strong>High</strong>: {{this.high}}°{{ this.deg.checked ? "F" : "C"}}</p>
+                    <p><strong>Low</strong>: {{this.low}}°{{ this.deg.checked ? "F" : "C"}}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+              
+            </ion-item>
+            
+            <div class="card-footer">
+              <ion-row primary>
+                <ion-col>
+                  <ion-item>  
+                    <button ion-button primary clear item-left (click)="saveFavorite(card)">
+                      <ion-icon name="star"></ion-icon>
+                      Save
+                    </button>
+                  </ion-item>
+                </ion-col>
+              
+                <ion-col>
+                  <ion-item>
+                    <ion-label text-right>°{{ this.deg.checked ? "F" : "C"}}</ion-label>
+                    <ion-toggle #deg checked="true" item-right (ionChange)="degrees(deg)"></ion-toggle>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </div>
+          
+          </ion-card-content>
+          
+            
+        </ion-card>
+      
+      
+  </ion-col>
   
-    <page-weather-card>
-    </page-weather-card>
+<!------------------------------------------------------------------------------------------------------------>
+  
+  <ion-col offset-10 width-80>
+    <page-weather-card></page-weather-card>
+  </ion-col>
 
 </ion-content>

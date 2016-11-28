@@ -1,4 +1,4 @@
-<ion-menu [content]="content" id="menu1">
+<ion-menu [content]="content" id="menu1" (ionClose)="menuClose()">
     <ion-header>
         <ion-toolbar>
             <ion-title>Menu</ion-title>
@@ -7,29 +7,99 @@
 
     <ion-content>
         <ion-list>
+            
             <ion-list-header>
                 <h2><strong>General</strong></h2>
             </ion-list-header>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            
+            <button menuClose ion-item *ngFor="let p of pages;" (click)="openPage(p)">
                 <p text-center>{{p.title}}</p>
             </button>
             <button menuClose ion-item (click)="logout()">
                 <p text-center>Logout</p>
             </button>
-            <ion-list-header>
-                <h2><strong>Saved Cities</strong></h2>
-            </ion-list-header>
-            <button menuClose ion-item *ngFor="let c of cities" (click)="goToCity(c)">
-                <p text-center>{{c.name}}</p>
-            </button>
             
-            <ion-item>
-                {{this.saved}}
-            </ion-item>
+            <!--<ion-list-header>-->
+                <!--<ion-row>-->
+                    <!--<ion-col>-->
+                    <ion-col offset-25 width-50>
+                        <button ion-button small round outline (click)="openSavedCities()">
+                            Saved Cities
+                            <!--<h2><strong>Saved Cities</strong></h2>-->
+                        </button>
+                    </ion-col>
+                <!--</ion-row>-->
+            <!--</ion-list-header>-->
+            
+            <!--<button menuClose ion-item *ngFor="let c of cities;" (click)="openCity(c)">-->
+            <!--    <p text-center>{{c.name}}</p>-->
+            <!--</button>-->
+            
+            <!--<page-card-list menuClose (gotCardList)="gotCardList($event)"></page-card-list>-->
+
+
+<!------------------------------------------------------------------------------------------------>
+
+            <div *ngIf="this.isOpen">
+                <ion-item *ngFor="let card of cardList; let i = index;">
+                    
+                    <ion-card>
+                        
+                        <ion-card-header>
+                            <ion-row>
+                              <ion-col text-center>City/Location #{{i + 1}}:</ion-col>
+                            </ion-row>
+                                
+                            <!--<ion-row>-->
+                            <!--  <ion-col text-center>{{card.cityName}}</ion-col>-->
+                            <!--</ion-row>-->
+                        </ion-card-header>
+                        <!--<ion-row>-->
+                        <!--  <ion-col><p>Model Id: {{card.id}}</p></ion-col>-->
+                        <!--</ion-row>-->
+                        
+                        <ion-card-content>
+                            <ion-row>
+                              <ion-col text-center center>
+                                  <button ion-button outline round small (click)="goToCity(card)">
+                                      <p text-center>{{card.cityName}}</p>
+                                  </button>
+                              </ion-col>
+                            </ion-row>
+                        </ion-card-content>
+                        
+                        <ion-row baseline>
+                          <ion-col text-center center3>
+                              <button ion-button outline round small color="danger" (click)="deleteCity(card.id, i)">
+                                  <ion-icon right name="trash"></ion-icon>
+                                      Delete
+                              </button>
+                          </ion-col>
+                        </ion-row>
+                        
+                    </ion-card>
+                
+                </ion-item>
+            </div>
+
+
+<!------------------------------------------------------------------------------------------------>
+
+        <hr>
+            <!--<button ion-item menuClose>-->
+                <button menuClose ion-button outline full color="dark">
+                    Close Menu
+                    <!--<strong>Close Menu</strong>-->
+                </button>
+            <!--</button>-->
         </ion-list>
+        
+        
     </ion-content>
 
 </ion-menu>
+
+<!--<page-menu></page-menu>-->
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false" persistent="true"></ion-nav>

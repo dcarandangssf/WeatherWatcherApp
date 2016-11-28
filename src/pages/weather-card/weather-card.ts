@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather'
 import { CardService } from '../../providers/card-service'
 import { Card } from '../../models/weather-card-model'
+import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the WeatherCard page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-weather-card',
   templateUrl: 'weather-card.html'
@@ -33,31 +29,20 @@ export class WeatherCardPage {
   public highF: any;
   public lowC: any;
   public highC: any;
+  public icon: any;
+  public icon2: any;
   
   constructor(
     public navCtrl: NavController,
     public weather: RestWeather,
+    public toastController: ToastController,
     public cardService: CardService) {
       this.getLocation();
-      
-      // console.log("weatherCard: " + this.weatherCard)
-      // console.log(this.weatherCard)
-      // console.log("card: " + this.card)
-      // console.log(this.card)
-      // console.log(this.locationData)
     }
 
   ionViewDidLoad() {
     console.log('Hello WeatherCardPage Page');
   }
-
-  // card = {
-  //   "userId": "",
-  //   "cityName": "",
-  //   "cityAPIUrl": ""
-  // }
-
-  
 
   getLocation() {
     this.weather.local()
@@ -67,26 +52,17 @@ export class WeatherCardPage {
           this.city = data.location.city;
           this.cityParse = data.location.city.split(' ').join('_');
           this.state = data.location.state;
-          this.requestUrl = data.location.requesturl;
+          this.requestUrl = 'https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/' + this.state + '/' + this.cityParse + '.json';
           
-          this.card = new Card("" , this.city + ", " + this.state, this.requestUrl)
+          console.log(this.requestUrl)
+          // 'https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/' + this.state + '/' + this.cityParse + '.json'
+          // https://api.wunderground.com/api/c56568eedbc03ac8/forecast/q/CA/North_Clairemont.json
+          
+          this.card = new Card("" , this.city + ", " + this.state, this.requestUrl, false)
           console.log(this.card)
           
-          // this.card.userId = window.localStorage.getItem("userId");
-          // this.card.cityName = this.city + ", " + this.state;
-          // this.card.cityAPIUrl = this.requestUrl;
-          
-          // console.log(this.city)
-          // console.log(this.state)
-          // console.log(this.requestUrl)
+          console.log(this.location)
           this.getLocalForecast(this.cityParse, this.state)
-          // return this.locationData = {
-          //   "location": this.location,
-          //   "city": this.city,
-          //   "cityParse": this.cityParse,
-          //   "state": this.state,
-          //   "requestUrl": this.requestUrl,
-          // }
         })
   }
 
@@ -94,6 +70,7 @@ export class WeatherCardPage {
     this.weather.getForecast(city, state)
       .subscribe(
         data => {
+          console.log(data)
           this.localForecast = data;
           this.lowF = data.forecast.simpleforecast.forecastday["0"].low.fahrenheit;
           this.highF = data.forecast.simpleforecast.forecastday["0"].high.fahrenheit;
@@ -101,20 +78,14 @@ export class WeatherCardPage {
           this.highC = data.forecast.simpleforecast.forecastday["0"].high.celsius;
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
+          this.icon2 = data.forecast.txt_forecast.forecastday["0"].icon_url;
+          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url.split('p').join('ps');
+          console.log('this.icon')
+          console.log(this.icon)
+          console.log(this.icon2)
           
           this.low = this.lowF;
           this.high = this.highF;
-          
-          // console.log(this.localForecast);
-          // console.log(this.low);
-          // console.log(this.forecast);
-          // return this.forecastData = {
-          //   "localForecast": this.localForecast,
-          //   "low": this.low,
-          //   "high": this.high,
-          //   "day": this.day,
-          //   "forecast": this.forecast,
-          // }
         }
       )
   }
@@ -125,6 +96,17 @@ export class WeatherCardPage {
     card.cityAPIUrl = this.requestUrl
     this.cardService.saveCard(card)
     console.log(card)
+    this.showToast()
+  }
+  
+  showToast() {
+    let toast = this.toastController.create({
+      message: 'Saved to favorites!',
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.present(toast);
   }
   
   degrees(deg) {
@@ -141,4 +123,16 @@ export class WeatherCardPage {
     }
     
   }
+ 
+  searchLocation(cityName) {
+    console.log(cityName)
+    this.weather.search(cityName)
+      .subscribe(
+        data => {
+          this.location = data;
+          console.log(this.location)
+          return this.location
+        })
+  }
+  
 }
