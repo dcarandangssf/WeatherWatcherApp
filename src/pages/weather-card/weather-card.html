@@ -1,49 +1,61 @@
-  <ion-card>
-    
-    <ion-card-header>
-      <ion-item text-center primary>
-        <h1 #card.cityName>{{this.city}}, {{this.state}}</h1>
-      </ion-item>
-    </ion-card-header>
-    
-    <ion-card-content width-50 offset-25>
-      <ion-item center text-center>
-        <h2>{{this.day}}</h2>
-        
-        <ion-col offset-25 width-50>
-          <img src={{this.icon}}>
-        </ion-col>
-        
-        <ion-item text-center>
-          <p><strong>Forecast:</strong> {{this.forecast}}</p>
-        </ion-item>
+<div class="container-background">
+  
 
-        <ion-item text-center>
-          <ion-row center>
-            <ion-col center offset-25 width-50>
-              <p><strong>High</strong>: {{this.high}}°{{ this.deg.checked ? "F" : "C"}}</p>
-              <p><strong>Low</strong>: {{this.low}}°{{ this.deg.checked ? "F" : "C"}}</p>
+    <ion-card>
+      
+        <ion-card-header>
+          <ion-item text-center primary text-wrap>
+            <h1 #card.cityName>{{this.city}}, {{this.state}}</h1>
+          </ion-item>
+        </ion-card-header>
+        
+        <ion-card-content>
+          
+          <ion-item text-center>
+            <h2>{{this.day}}</h2>
+            
+            <ion-item>
+              <ion-col offset-33 width-33>
+                <img src="{{this.icon2}}">
+              </ion-col>
+            </ion-item>
+            
+            <ion-item text-center text-wrap>
+              <p><strong>Forecast:</strong> {{this.forecast}}</p>
+            </ion-item>
+    
+            <ion-item text-center>
+              <ion-row>
+                <ion-col>
+                  <p><strong>High</strong>: {{this.high}}°{{ this.deg.checked ? "F" : "C"}}</p>
+                  <p><strong>Low</strong>: {{this.low}}°{{ this.deg.checked ? "F" : "C"}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+            
+          </ion-item>
+        </ion-card-content>
+        
+        <div class="card-footer">
+          <ion-row baseline primary>
+            <ion-col>
+              <ion-item>  
+                <button ion-button primary clear item-left (click)="saveFavorite(card)">
+                  <ion-icon name="star"></ion-icon>
+                  Save
+                </button>
+              </ion-item>
+            </ion-col>
+          
+            <ion-col>
+              <ion-item>
+                <ion-label text-right>°{{ this.deg.checked ? "F" : "C"}}</ion-label>
+                <ion-toggle #deg checked="true" item-right (ionChange)="degrees(deg)"></ion-toggle>
+              </ion-item>
             </ion-col>
           </ion-row>
-        </ion-item>
+        </div>
         
-      </ion-item>
-    </ion-card-content>
+    </ion-card>
     
-      <ion-row baseline primary>
-        <ion-col>  
-          <button ion-button primary clear item-left (click)="saveFavorite(card)">
-            <ion-icon name="star"></ion-icon>
-            Save
-          </button>
-        </ion-col>
-      
-        <ion-col>
-          <ion-item>
-            <ion-label text-right>°{{ this.deg.checked ? "F" : "C"}}</ion-label>
-            <ion-toggle #deg checked="true" item-right (ionChange)="degrees(deg)"></ion-toggle>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    
-  </ion-card>
+</div>

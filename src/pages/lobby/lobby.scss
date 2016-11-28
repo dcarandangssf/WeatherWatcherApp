@@ -1,10 +1,20 @@
 page-lobby {
-    img {
+    
+    img.background {
         position: absolute;
         z-index: -1;
-        height: 300%;
-        width: 200%;
+        height: 210%;
+        width: 100%;
         top: 0;
         left: 0;
     }
+    
+    ion-card {
+        opacity: 0.8;
+    }
+    
+    ion-searchbar {
+        opacity: 0.8;
+    }
+    
 }

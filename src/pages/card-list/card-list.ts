@@ -33,7 +33,7 @@ export class CardListPage {
           console.log(this.cardList)
           return this.cardList
         }, err => {
-          alert("Warning Will Robinson!");
+          console.log(err.statusText);
           this.cardList = [];
         });
   }

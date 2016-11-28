@@ -48,8 +48,16 @@ export class LoginPage {
       window.localStorage.setItem('token', res.id);
       window.localStorage.setItem('userId', res.userId);
       this.navCtrl.setRoot(LobbyPage);
+        if (res.status === 422) {
+          console.log(res)
+          alert("Email is already taken")
+        }
     }, err => {
       console.log(err);
+        if (err.status === 401) {
+          console.log(err)
+          alert(err.statusText)
+        }
     });
   }
 

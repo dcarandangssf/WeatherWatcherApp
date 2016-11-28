@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather'
 import { CardService } from '../../providers/card-service'
 import { Card } from '../../models/weather-card-model'
@@ -30,10 +30,12 @@ export class WeatherCardPage {
   public lowC: any;
   public highC: any;
   public icon: any;
+  public icon2: any;
   
   constructor(
     public navCtrl: NavController,
     public weather: RestWeather,
+    public toastController: ToastController,
     public cardService: CardService) {
       this.getLocation();
     }
@@ -76,7 +78,11 @@ export class WeatherCardPage {
           this.highC = data.forecast.simpleforecast.forecastday["0"].high.celsius;
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
-          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url;
+          this.icon2 = data.forecast.txt_forecast.forecastday["0"].icon_url;
+          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url.split('p').join('ps');
+          console.log('this.icon')
+          console.log(this.icon)
+          console.log(this.icon2)
           
           this.low = this.lowF;
           this.high = this.highF;
@@ -90,6 +96,17 @@ export class WeatherCardPage {
     card.cityAPIUrl = this.requestUrl
     this.cardService.saveCard(card)
     console.log(card)
+    this.showToast()
+  }
+  
+  showToast() {
+    let toast = this.toastController.create({
+      message: 'Saved to favorites!',
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.present(toast);
   }
   
   degrees(deg) {

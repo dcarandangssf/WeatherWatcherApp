@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather';
 import { Card } from '../../models/weather-card-model'
 import { CardService } from '../../providers/card-service'
@@ -34,26 +34,25 @@ export class SearchResultsPage {
   public lowC: any;
   public highC: any;
   public icon: any;
+  public icon2: any;
   public savedResults: any;
   public savedResult: any;
 
   constructor(
     public navCtrl: NavController,
     public weather: RestWeather,
+    public toastController: ToastController,
     public cardService: CardService) {
-      // if(this.savedCard) {
-      //   console.log('savedCard!')
-      //   console.log(this.savedCard)
-      //   this.savedResults = this.searchLocation(this.savedCard)
-      //   this.savedResult = this.savedResults[0]
-      //   console.log('savedResult')
-      //   console.log(this.savedResult)
-      //   // this.displayWeather(this.savedResult)
-      // }
     }
 
   ionViewDidLoad() {
     console.log('Hello SearchResultsPage Page');
+  }
+
+  onClear(search) {
+    console.log("clear search")
+    console.log(search)
+    this.results = null;
   }
 
   searchLocation(cityName) {
@@ -63,8 +62,6 @@ export class SearchResultsPage {
         data => {
           this.results = data.RESULTS;
           console.log(this.results)
-          return this.results
-          // return data
         }
       )
   }
@@ -106,30 +103,43 @@ export class SearchResultsPage {
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
           this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url;
+          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url.split('p').join('ps');
+          this.icon2 = data.forecast.txt_forecast.forecastday["0"].icon_url;
           
           this.low = this.lowF;
           this.high = this.highF;
         }
       )
   }
-  
+    
   saveFavorite(card) {
     console.log("favorite saved")
     card.userId = window.localStorage.getItem("userId")
     card.cityAPIUrl = this.requestUrl
     this.cardService.saveCard(card)
     console.log(card)
+    this.showToast()
+  }
+  
+  showToast() {
+    let toast = this.toastController.create({
+      message: 'Saved to favorites!',
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.present(toast);
   }
   
   degrees(deg) {
     console.log("degrees changed")
     console.log(deg)
     
-    if (deg.checked === false) {
+    if (deg.checked === true) {
       this.low = this.lowF;
       this.high = this.highF;
     }
-    else if (deg.checked === true) {
+    else if (deg.checked === false) {
       this.low = this.lowC;
       this.high = this.highC;
     }

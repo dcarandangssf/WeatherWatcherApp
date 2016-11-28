@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { RestWeather } from './rest-weather'
-/*
-  Generated class for the SearchService provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+
+
 @Injectable()
 export class LocationService {
   public city: any;
@@ -34,23 +31,9 @@ export class LocationService {
           this.location = data;
           console.log(this.location)
           return this.location;
-          // this.city = data.location.city;
-          // this.cityParse = data.location.city.split(' ').join('_');
-          // this.state = data.location.state;
-          // this.requestUrl = data.location.requesturl;
-          // console.log(data.location)
-          // // console.log(this.requestUrl)
-          // this.getLocalForecast(this.cityParse, this.state)
-          // return {
-          //   "location": this.location,
-          //   "city": this.city,
-          //   "cityParse": this.cityParse,
-          //   "state": this.state,
-          //   "requestUrl": this.requestUrl,
-          // }
         })
   }
-  
+
   getLocation() {
     this.weather.local()
       .subscribe(
@@ -60,8 +43,6 @@ export class LocationService {
           this.cityParse = data.location.city.split(' ').join('_');
           this.state = data.location.state;
           this.requestUrl = data.location.requesturl;
-          // console.log(data.location)
-          // console.log(this.requestUrl)
           this.getLocalForecast(this.cityParse, this.state)
           return {
             "location": this.location,

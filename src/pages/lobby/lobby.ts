@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { NavController, Nav, MenuController, NavParams } from 'ionic-angular';
+import { NavController, Nav, MenuController, NavParams, ToastController } from 'ionic-angular';
 import { RestWeather } from '../../providers/rest-weather';
 import { CitiesRest } from '../../providers/cities-rest';
 // import { LocationService } from '../../providers/location-service'
@@ -43,6 +43,7 @@ export class LobbyPage {
   public day: any;
   public forecast: any;
   public icon: any;
+  public icon2: any;
   public low: any;
   public high: any;
   
@@ -52,6 +53,7 @@ export class LobbyPage {
     private menu: MenuController,
     public cardService: CardService,
     public weather: RestWeather,
+    public toastController: ToastController,
     public searchResultsPage: SearchResultsPage) {
     }
     
@@ -63,36 +65,10 @@ export class LobbyPage {
     if (this.savedCard) {
       console.log('savedCard')
       console.log(this.savedCard)
-      // this.searchResultsPage.searchLocation(this.savedCard.cityName)
-      // this.searchResultsPage.displayWeather(this.searchResultsPage.searchLocation(this.savedCard.cityName))
-      // this.results = this.searchResultsPage.searchLocation(this.savedCard.cityName)
-      // console.log('results')
-      // console.log(this.results)
-      // this.searchResultsPage.displayWeather(this.results[0])
-      
       this.searchLocation(this.savedCard.cityName)
-      // this.results = this.searchLocation(this.savedCard.cityName)
-      if(this.results) {
-        console.log('results')
-        console.log(this.results)
-        this.displayWeather(this.results[0])
-      }
     }
-    // this.gotSavedCard.emit(this.savedCard)
-    
-    
-    //  currently unable to retrive data from search
     
   }
-  
-  // gotCardList(cardList) {
-  //   this.cardList = cardList
-  // }
-  
-  // gotSavedCard(savedCard) {
-    
-  // }
-  
   
 //////////////////////////////////////////////////////////
 
@@ -106,7 +82,6 @@ export class LobbyPage {
           console.log(this.results)
           this.displayWeather(data.RESULTS[0])
           return this.results
-          // return data
         }
       )
   }
@@ -120,7 +95,6 @@ export class LobbyPage {
     this.weather.searchWeather(this.lat, this.lon)
       .subscribe(
           data => {
-            
             this.location = data.location;
             this.city = data.location.city;
             this.cityParse = data.location.city.split(' ').join('_');
@@ -148,30 +122,43 @@ export class LobbyPage {
           this.day = data.forecast.txt_forecast.forecastday["0"].title;
           this.forecast = data.forecast.txt_forecast.forecastday["0"].fcttext;
           this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url;
+          this.icon = data.forecast.txt_forecast.forecastday["0"].icon_url.split('p').join('ps');
+          this.icon2 = data.forecast.txt_forecast.forecastday["0"].icon_url;
           
           this.low = this.lowF;
           this.high = this.highF;
         }
       )
   }
-  
+    
   saveFavorite(card) {
     console.log("favorite saved")
     card.userId = window.localStorage.getItem("userId")
     card.cityAPIUrl = this.requestUrl
     this.cardService.saveCard(card)
     console.log(card)
+    this.showToast()
+  }
+  
+  showToast() {
+    let toast = this.toastController.create({
+      message: 'Saved to favorites!',
+      duration: 2000,
+      position: 'middle'
+    });
+
+    toast.present(toast);
   }
   
   degrees(deg) {
     console.log("degrees changed")
     console.log(deg)
     
-    if (deg.checked === false) {
+    if (deg.checked === true) {
       this.low = this.lowF;
       this.high = this.highF;
     }
-    else if (deg.checked === true) {
+    else if (deg.checked === false) {
       this.low = this.lowC;
       this.high = this.highC;
     }
