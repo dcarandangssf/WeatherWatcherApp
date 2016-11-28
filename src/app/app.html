@@ -14,15 +14,15 @@
                 </ion-col>
             </ion-list-header>
             
-            <ion-col text-center>
-                <button menuClose ion-button small outline round color="primary" *ngFor="let p of pages;" (click)="openPage(p)">
-                    <p text-center>{{p.title}}</p>
+            <ion-col text-center *ngFor="let p of pages;">
+                <button menuClose ion-button small outline round color="primary" (click)="openPage(p)">
+                   {{p.title}}
                 </button>
             </ion-col>
             
             <ion-col text-center>
                 <button menuClose ion-button small outline round color="primary" (click)="logout()">
-                    <p text-center>Logout</p>
+                    Logout
                 </button>
             </ion-col>
             
