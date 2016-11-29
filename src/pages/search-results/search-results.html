@@ -10,9 +10,11 @@
 <ion-col>
   <ion-list *ngIf="results">
     <ion-col>
-      <ion-item *ngFor="let result of results" (click)=displayWeather(result)>
-        <p>{{ result.name }}</p>
-      </ion-item>
+      <ion-col>
+        <ion-item *ngFor="let result of results" (click)=displayWeather(result)>
+          <p>{{ result.name }}</p>
+        </ion-item>
+      </ion-col>
     </ion-col>
   </ion-list>
 </ion-col>

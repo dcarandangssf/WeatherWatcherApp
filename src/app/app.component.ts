@@ -82,11 +82,11 @@ export class MyApp {
       this.nav.setRoot(LoginPage);
     });
   }
-  
+
   // gotCardList(cardList) {
   //   this.cardList = cardList
   // }
-  
+
 ////////////////////////////////////////////////////////////////////////////////////////
 
   getCardList() {

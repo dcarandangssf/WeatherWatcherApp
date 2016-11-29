@@ -1,8 +1,11 @@
 page-lobby {
     
+    ion-content {
+        position: relative;
+    }
+    
     img.background {
         position: fixed;
-        z-index: -1;
         height: 100%;
         width: 100%;
         max-height: auto;
@@ -10,30 +13,20 @@ page-lobby {
         left: 0;
     }
     
-    .overlay {
+    .content {
         position: relative;
-        height: 100%;
-        width: 100%;
-        max-height: auto;
-        background: black;
-        // background: radial-gradient(circle, black, white);
-        opacity: 0.8;
-        overflow: scroll;
-    }
-    
-    ion-card {
-        opacity: 0.8;
-        max-width: 500px;
         margin: auto;
     }
     
-    ion-searchbar {
+    .overlay {
+        position: absolute;
         opacity: 0.8;
+        background: black;
+        height: 100%;
+        max-height: auto;
+        width: 100%;
+        overflow: scroll;
     }
     
-    ion-content {
-        position: relative;
-        text-align: center;
-    }
     
 }
